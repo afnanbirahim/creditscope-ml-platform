@@ -1,0 +1,37 @@
+FROM python:3.12.0-slim-bookworm
+
+LABEL org.opencontainers.image.title="CreditScope UI" \
+      org.opencontainers.image.version="creditscope-ui-1.0.0" \
+      org.opencontainers.image.description="Streamlit frontend for the CreditScope API" \
+      io.creditscope.api.version="creditscope-api-1.0.0"
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PYTHONPATH=/app/src \
+    HOME=/tmp \
+    STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+
+WORKDIR /app
+
+COPY docker/requirements-ui.txt /tmp/requirements-ui.txt
+RUN python -m pip install --no-cache-dir --requirement /tmp/requirements-ui.txt \
+    && rm /tmp/requirements-ui.txt \
+    && groupadd --system creditscope \
+    && useradd --system --gid creditscope --home-dir /home/creditscope \
+       --create-home creditscope
+
+COPY --chown=creditscope:creditscope src/creditscope/__init__.py \
+    src/creditscope/api_client.py src/creditscope/frontend.py \
+    src/creditscope/schema.py src/creditscope/ui.py /app/src/creditscope/
+
+USER creditscope
+
+EXPOSE 8501
+
+HEALTHCHECK --interval=15s --timeout=5s --start-period=15s --retries=5 \
+    CMD ["python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health', timeout=3).read()"]
+
+CMD ["python", "-m", "streamlit", "run", "src/creditscope/ui.py", \
+     "--server.address", "0.0.0.0", "--server.port", "8501", \
+     "--server.headless", "true"]

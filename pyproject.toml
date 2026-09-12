@@ -48,6 +48,7 @@ creditscope-freeze-policy = "creditscope.stage6:main"
 creditscope-explainability-audit = "creditscope.stage8:main"
 creditscope-build-frozen-model = "creditscope.build_frozen_model:main"
 creditscope-predict = "creditscope.inference:main"
+creditscope-verify-container = "creditscope.container_verify:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

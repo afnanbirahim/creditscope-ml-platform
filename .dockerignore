@@ -1,0 +1,33 @@
+# Allow-list the shared build context. Dockerfiles copy only runtime files.
+*
+
+!Dockerfile.api
+!Dockerfile.ui
+
+!docker/
+!docker/requirements-api.txt
+!docker/requirements-ui.txt
+
+!src/
+!src/creditscope/
+!src/creditscope/__init__.py
+!src/creditscope/api.py
+!src/creditscope/api_client.py
+!src/creditscope/container_verify.py
+!src/creditscope/frontend.py
+!src/creditscope/inference.py
+!src/creditscope/modeling.py
+!src/creditscope/schema.py
+!src/creditscope/splits.py
+!src/creditscope/ui.py
+
+!artifacts/
+!artifacts/model/
+!artifacts/model/creditscope_frozen_model.joblib
+!artifacts/model/model_manifest.json
+!artifacts/model/input_schema.json
+!artifacts/model/golden_inference_fixtures.json
+
+# Explicitly excluded by the leading allow-list rule: .git, local Python
+# environments, caches, work/, data/, reports/, notebooks/, tests/, examples/,
+# editor settings, credentials, and all other generated or development files.

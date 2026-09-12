@@ -1,0 +1,90 @@
+name: CreditScope CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Quality, tests, and frozen evidence
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12.0
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12.0
+          cache: pip
+
+      - name: Install test dependencies under frozen constraints
+        run: |
+          python -m pip install --constraint docker/constraints-ci.txt -e ".[dev,api,ui]"
+
+      - name: Verify dependencies
+        run: python -m pip check
+
+      - name: Verify frozen evidence hashes
+        run: sha256sum --check scripts/frozen_evidence.sha256
+
+      - name: Retrieve and verify the untracked UCI source snapshot
+        run: creditscope-verify-data --save-raw
+
+      - name: Run Ruff
+        run: python -m ruff check .
+
+      - name: Compile Python sources and tests
+        run: python -m compileall -q -f src tests scripts
+
+      - name: Run complete test suite
+        run: python -m pytest
+
+      - name: Verify canonical model and golden fixtures on Linux
+        run: python -m creditscope.container_verify
+
+  containers:
+    name: Docker images and Compose smoke
+    runs-on: ubuntu-24.04
+    needs: quality
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12.0 for host-side smoke client
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12.0
+
+      - name: Install host-side smoke dependency
+        run: python -m pip install httpx==0.28.1
+
+      - name: Build API image
+        run: docker build --file Dockerfile.api --tag creditscope-api:1.0.0 .
+
+      - name: Build UI image
+        run: docker build --file Dockerfile.ui --tag creditscope-ui:1.0.0 .
+
+      - name: Verify Windows-created canonical model inside Linux image
+        run: docker run --rm creditscope-api:1.0.0 python -m creditscope.container_verify
+
+      - name: Start Compose stack
+        run: docker compose up --detach --wait --no-build
+
+      - name: Verify UI-to-API network path
+        run: |
+          docker compose exec -T ui python -c "from creditscope.api_client import CreditScopeAPIClient; c=CreditScopeAPIClient(); assert c.health()['status']=='ok'; assert c.model_info()['model_version']=='creditscope-model-1.0.0'; c.close(); print('UI-to-API connectivity passed')"
+
+      - name: Run end-to-end golden smoke test
+        run: python scripts/smoke_compose.py
+
+      - name: Show Compose state on failure
+        if: failure()
+        run: docker compose ps && docker compose logs --no-color --tail 200
+
+      - name: Stop Compose stack
+        if: always()
+        run: docker compose down --volumes --remove-orphans

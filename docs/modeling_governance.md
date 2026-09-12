@@ -193,6 +193,22 @@ evidence about actual lending economics or a jurisdiction-specific requirement.
 - UI language remains good/bad credit risk and explicitly rejects lending
   approval, rejection, eligibility, financial-advice, causal, or fairness claims.
 
+## Stage 12 infrastructure controls
+
+- Containerization and CI may package and verify the existing services but may
+  not retrain, rebuild, reserialize, tune, recalibrate, rethreshold, or rescore
+  the frozen policy.
+- The API runtime may deserialize only the trusted bundled Stage 9 artifact after
+  strict hash verification. No user-controlled pickle path or upload exists.
+- The UI runtime contains no model artifact, joblib, XGBoost, SHAP, inference
+  module, training data, or holdout evidence; it communicates only over HTTP.
+- Raw, development, holdout, subgroup-audit, and performance-evidence files are
+  excluded from runtime image contexts. Model-policy values remain immutable.
+- CI and local container checks are engineering parity tests using committed
+  development-derived golden fixtures. They are not new performance evaluation.
+- No container registry publication, cloud deployment, credentials, privileged
+  mode, Docker socket mount, or Stage 13 work is authorized.
+
 ## Stage 8 post-evaluation governance
 
 - Stage 7 performance and the frozen policy are permanent; explainability or

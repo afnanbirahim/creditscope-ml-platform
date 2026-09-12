@@ -1,0 +1,37 @@
+FROM python:3.12.0-slim-bookworm
+
+LABEL org.opencontainers.image.title="CreditScope API" \
+      org.opencontainers.image.version="creditscope-api-1.0.0" \
+      org.opencontainers.image.description="Educational credit-risk inference API" \
+      io.creditscope.model.version="creditscope-model-1.0.0"
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PYTHONPATH=/app/src
+
+WORKDIR /app
+
+COPY docker/requirements-api.txt /tmp/requirements-api.txt
+RUN python -m pip install --no-cache-dir --requirement /tmp/requirements-api.txt \
+    && rm /tmp/requirements-api.txt \
+    && groupadd --system creditscope \
+    && useradd --system --gid creditscope --home-dir /home/creditscope \
+       --create-home creditscope
+
+COPY --chown=creditscope:creditscope src/creditscope/__init__.py src/creditscope/api.py \
+    src/creditscope/container_verify.py src/creditscope/inference.py \
+    src/creditscope/modeling.py src/creditscope/schema.py \
+    src/creditscope/splits.py /app/src/creditscope/
+COPY --chown=creditscope:creditscope artifacts/model/creditscope_frozen_model.joblib \
+    artifacts/model/model_manifest.json artifacts/model/input_schema.json \
+    artifacts/model/golden_inference_fixtures.json /app/artifacts/model/
+
+USER creditscope
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=5 \
+    CMD ["python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3).read()"]
+
+CMD ["python", "-m", "uvicorn", "creditscope.api:app", "--host", "0.0.0.0", "--port", "8000"]

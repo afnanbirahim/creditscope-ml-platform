@@ -5,7 +5,7 @@ prototype for education, research, and professional portfolio demonstration. It
 is **not** an automated lending approval system and must not be used to make
 real credit decisions.
 
-## Completed scope: Stages 1–11
+## Completed scope: Stages 1–11; Stage 12 implemented
 
 Stage 1 initialized the project and verified the source data. Stage 2 adds the
 official data dictionary, stable internal names, a validated analysis view,
@@ -89,6 +89,14 @@ form with documented source-category labels, displays neutral good/bad
 credit-risk results, and handles unavailable or rejected API requests without
 raw traces. It does not load the model, reproduce threshold logic, request audit
 attributes, retain payloads, or access holdout evidence. See `docs/frontend.md`.
+
+Stage 12 adds separate, non-root API and UI container definitions, a private
+two-service Compose topology, strict build-context controls, frozen-model Linux
+verification, and push/pull-request CI. The Codex sandbox cannot access Docker;
+therefore container runtime, Linux artifact compatibility, and Compose parity
+remain an explicit external-validation checkpoint until the documented
+PowerShell workflow is run and its output reviewed. See `docs/containers.md` and
+`docs/ci.md`.
 
 The data source is the official UCI Machine Learning Repository entry
 [Statlog (German Credit Data), dataset ID 144](https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata),
@@ -176,6 +184,24 @@ Open `http://127.0.0.1:8501`. The frontend defaults to the local API at
 `http://127.0.0.1:8000`; `CREDITSCOPE_API_URL` may point it to another trusted
 CreditScope API. Model policy values are not frontend configuration. See
 `docs/frontend.md` for architecture, validation, privacy, and troubleshooting.
+
+Run the complete two-service demo with Docker Desktop:
+
+```powershell
+docker compose build
+docker compose up --detach --wait --no-build
+docker compose ps
+```
+
+Open Streamlit at `http://127.0.0.1:8501`, FastAPI at
+`http://127.0.0.1:8000`, or Swagger at `http://127.0.0.1:8000/docs`. The full
+cross-platform model, endpoint, networking, and golden-parity validation is:
+
+```powershell
+.\scripts\manual_docker_validation.ps1
+```
+
+Stop the stack with `docker compose down --volumes --remove-orphans`.
 
 The verification command fetches UCI dataset ID 144, validates its identity and
 documented dimensions, checks missing values and target labels, writes the
@@ -294,6 +320,11 @@ approval, rejection, or eligibility.
 Stage 10 and Stage 11 preserve that separation. FastAPI owns the verified model
 process; Streamlit calls FastAPI only and contains no model loading, fitting,
 thresholding, XGBoost, SHAP, training-data, or holdout-data path.
+
+Stage 12 changes only infrastructure. Its API image loads the unchanged,
+hash-verified Stage 9 artifact; its UI image contains no model or inference
+stack. Container startup cannot fit or rebuild the model. CI validates evidence,
+quality, services, and images but performs no deployment or model development.
 
 The Stage 3R reconciliation policy requires exact equality for hashes, membership,
 counts, classifications, integer costs, feature boundaries, and fixed model
