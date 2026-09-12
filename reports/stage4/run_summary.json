@@ -1,0 +1,101 @@
+{
+  "stage": "Stage 4: untuned tree-model comparison",
+  "environment": {
+    "python": "3.12.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.4.2",
+    "xgboost": "3.4.1",
+    "joblib": "1.6.0",
+    "threadpoolctl": "3.6.0"
+  },
+  "development_rows": 800,
+  "final_test_rows_locked_and_not_scored": 200,
+  "predictive_feature_count": 17,
+  "numeric_features": [
+    "duration_months",
+    "credit_amount"
+  ],
+  "categorical_one_hot_features": [
+    "checking_account_status",
+    "credit_history",
+    "purpose",
+    "savings_account_status",
+    "employment_duration",
+    "installment_rate_percent",
+    "other_debtors_guarantors",
+    "residence_duration",
+    "property",
+    "other_installment_plans",
+    "housing",
+    "existing_credits_count",
+    "job",
+    "dependents_count",
+    "telephone"
+  ],
+  "audit_only_attributes": [
+    "personal_status_sex",
+    "age_years",
+    "foreign_worker"
+  ],
+  "random_forest_parameters": {
+    "n_estimators": 500,
+    "random_state": 42,
+    "n_jobs": -1
+  },
+  "xgboost_parameters": {
+    "objective": "binary:logistic",
+    "eval_metric": "logloss",
+    "n_estimators": 300,
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "random_state": 42,
+    "n_jobs": -1,
+    "tree_method": "hist"
+  },
+  "cv": {
+    "type": "StratifiedKFold",
+    "n_splits": 5,
+    "shuffle": true,
+    "random_state": 42,
+    "same_precomputed_folds_for_all_models": true
+  },
+  "threshold": 0.5,
+  "cost_definition": "5 * false_negative + 1 * false_positive",
+  "manifest_sha256_before": "32fb4c9ac2cdb358e3bffd145cd97e1a393c14946888d46212d0b395523e99af",
+  "manifest_sha256_after": "32fb4c9ac2cdb358e3bffd145cd97e1a393c14946888d46212d0b395523e99af",
+  "raw_snapshot_sha256_before": "4ce6007c9eb3dbcd67e7858773566b0eb3ff140033cf67b2d8a42b3a89edfb9d",
+  "raw_snapshot_sha256_after": "4ce6007c9eb3dbcd67e7858773566b0eb3ff140033cf67b2d8a42b3a89edfb9d",
+  "logistic_matches_stage3r_under_reconciliation_policy": true,
+  "reproducibility_reconciliation": {
+    "floating_point_atol": 1e-10,
+    "maximum_aggregate_absolute_difference": 4.082650884029704e-12,
+    "maximum_fold_absolute_difference": 2.097552687096993e-11,
+    "exact_counts_and_cost_match": true,
+    "floating_metrics_match": true
+  },
+  "fold_membership_sha256": "513fc9249a4c00be3ba67fa99ea20a7ac76b653694130cf66733ea08f97d0b92",
+  "development_oof_predictions_sha256": "c1e96b552ca7f5510f8aa9eda88db128e9cfbdd8ef30ca8535fac69646c486f9",
+  "compatibility_warnings": [
+    "Unknown solver options: iprint"
+  ],
+  "final_test_predictions_generated": false,
+  "final_test_metrics_generated": false,
+  "hyperparameter_search_performed": false,
+  "threshold_optimization_performed": false,
+  "class_weighting_performed": false,
+  "resampling_performed": false,
+  "probability_calibration_performed": false,
+  "shap_performed": false,
+  "figures": [
+    "reports\\stage4\\figures\\roc_comparison.png",
+    "reports\\stage4\\figures\\precision_recall_comparison.png",
+    "reports\\stage4\\figures\\confusion_matrices.png",
+    "reports\\stage4\\figures\\calibration_comparison.png",
+    "reports\\stage4\\figures\\train_validation_diagnostic.png",
+    "reports\\stage4\\figures\\feature_importance_random_forest.png",
+    "reports\\stage4\\figures\\feature_importance_xgboost.png"
+  ]
+}

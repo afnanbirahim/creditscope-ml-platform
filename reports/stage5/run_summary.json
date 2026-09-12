@@ -1,0 +1,157 @@
+{
+  "stage": "Stage 5: controlled XGBoost hyperparameter tuning",
+  "environment": {
+    "python": "3.12.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.4.2",
+    "xgboost": "3.4.1",
+    "joblib": "1.6.0",
+    "threadpoolctl": "3.6.0"
+  },
+  "development_rows": 800,
+  "final_test_rows_locked_and_not_scored": 200,
+  "predictive_feature_count": 17,
+  "numeric_features": [
+    "duration_months",
+    "credit_amount"
+  ],
+  "categorical_one_hot_features": [
+    "checking_account_status",
+    "credit_history",
+    "purpose",
+    "savings_account_status",
+    "employment_duration",
+    "installment_rate_percent",
+    "other_debtors_guarantors",
+    "residence_duration",
+    "property",
+    "other_installment_plans",
+    "housing",
+    "existing_credits_count",
+    "job",
+    "dependents_count",
+    "telephone"
+  ],
+  "audit_only_attributes": [
+    "personal_status_sex",
+    "age_years",
+    "foreign_worker"
+  ],
+  "outer_cv": {
+    "source": "persisted Stage 4 fold membership",
+    "folds": 5,
+    "sha256": "513fc9249a4c00be3ba67fa99ea20a7ac76b653694130cf66733ea08f97d0b92"
+  },
+  "inner_cv": {
+    "type": "StratifiedKFold",
+    "folds": 4,
+    "shuffle": true,
+    "random_state": 42
+  },
+  "search": {
+    "type": "RandomizedSearchCV",
+    "n_iter": 40,
+    "random_state": 42,
+    "primary_metric": "average_precision",
+    "search_n_jobs": -1,
+    "xgboost_n_jobs": 1,
+    "space": {
+      "classifier__n_estimators": [
+        150,
+        250,
+        350,
+        500,
+        700
+      ],
+      "classifier__max_depth": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "classifier__learning_rate": [
+        0.02,
+        0.03,
+        0.05,
+        0.08,
+        0.1
+      ],
+      "classifier__min_child_weight": [
+        1,
+        3,
+        5,
+        8
+      ],
+      "classifier__subsample": [
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "classifier__colsample_bytree": [
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "classifier__gamma": [
+        0.0,
+        0.25,
+        0.5,
+        1.0
+      ],
+      "classifier__reg_alpha": [
+        0.0,
+        0.01,
+        0.1,
+        0.5
+      ],
+      "classifier__reg_lambda": [
+        0.5,
+        1.0,
+        2.0,
+        5.0,
+        10.0
+      ]
+    }
+  },
+  "threshold": 0.5,
+  "cost_definition": "5 * false_negative + 1 * false_positive",
+  "split_sha256_before": "32fb4c9ac2cdb358e3bffd145cd97e1a393c14946888d46212d0b395523e99af",
+  "split_sha256_after": "32fb4c9ac2cdb358e3bffd145cd97e1a393c14946888d46212d0b395523e99af",
+  "raw_sha256_before": "4ce6007c9eb3dbcd67e7858773566b0eb3ff140033cf67b2d8a42b3a89edfb9d",
+  "raw_sha256_after": "4ce6007c9eb3dbcd67e7858773566b0eb3ff140033cf67b2d8a42b3a89edfb9d",
+  "stage4_oof_sha256": "c1e96b552ca7f5510f8aa9eda88db128e9cfbdd8ef30ca8535fac69646c486f9",
+  "outer_fold_membership_sha256": "513fc9249a4c00be3ba67fa99ea20a7ac76b653694130cf66733ea08f97d0b92",
+  "nested_oof_predictions_sha256": "eecccdb9ae24d747562b5914c5f54bc5838688df4019b013552d1b87217460f5",
+  "final_selected_parameters": {
+    "subsample": 0.7,
+    "reg_lambda": 10.0,
+    "reg_alpha": 0.01,
+    "n_estimators": 350,
+    "min_child_weight": 3,
+    "max_depth": 5,
+    "learning_rate": 0.03,
+    "gamma": 1.0,
+    "colsample_bytree": 0.8
+  },
+  "warnings": [],
+  "final_test_predictions_generated": false,
+  "final_test_metrics_generated": false,
+  "threshold_optimization_performed": false,
+  "class_or_sample_weighting_performed": false,
+  "resampling_performed": false,
+  "probability_calibration_performed": false,
+  "shap_performed": false,
+  "feature_selection_performed": false,
+  "figures": [
+    "reports\\stage5\\figures\\tuned_vs_untuned_roc.png",
+    "reports\\stage5\\figures\\tuned_vs_untuned_precision_recall.png",
+    "reports\\stage5\\figures\\confusion_matrices.png",
+    "reports\\stage5\\figures\\calibration_comparison.png",
+    "reports\\stage5\\figures\\train_validation_gap.png",
+    "reports\\stage5\\figures\\probability_change_distribution.png",
+    "reports\\stage5\\figures\\hyperparameter_stability.png"
+  ]
+}

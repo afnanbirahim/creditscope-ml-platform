@@ -1,0 +1,21 @@
+feature,role,feature_type,included_in_baseline_prediction
+duration_months,predictive,numerical,True
+credit_amount,predictive,numerical,True
+installment_rate_percent,predictive,numerical,True
+residence_duration,predictive,numerical,True
+existing_credits_count,predictive,numerical,True
+dependents_count,predictive,numerical,True
+employment_duration,predictive,ordinal categorical,True
+job,predictive,ordinal categorical,True
+checking_account_status,predictive,nominal categorical,True
+credit_history,predictive,nominal categorical,True
+purpose,predictive,nominal categorical,True
+savings_account_status,predictive,nominal categorical,True
+other_debtors_guarantors,predictive,nominal categorical,True
+property,predictive,nominal categorical,True
+other_installment_plans,predictive,nominal categorical,True
+housing,predictive,nominal categorical,True
+telephone,predictive,nominal categorical,True
+personal_status_sex,audit only,direct sensitive/demographic attribute,False
+age_years,audit only,direct sensitive/demographic attribute,False
+foreign_worker,audit only,direct sensitive/demographic attribute,False

@@ -1,0 +1,366 @@
+{
+  "schema_version": "1.0.0",
+  "model_version": "creditscope-model-1.0.0",
+  "strict": true,
+  "additional_fields_allowed": false,
+  "audit_only_fields_rejected": [
+    "personal_status_sex",
+    "age_years",
+    "foreign_worker"
+  ],
+  "field_order": [
+    "duration_months",
+    "credit_amount",
+    "checking_account_status",
+    "credit_history",
+    "purpose",
+    "savings_account_status",
+    "employment_duration",
+    "installment_rate_percent",
+    "other_debtors_guarantors",
+    "residence_duration",
+    "property",
+    "other_installment_plans",
+    "housing",
+    "existing_credits_count",
+    "job",
+    "dependents_count",
+    "telephone"
+  ],
+  "fields": [
+    {
+      "name": "duration_months",
+      "type": "finite_number",
+      "required": true,
+      "semantic_description": "Duration",
+      "source_field": "Attribute2",
+      "caveat": "Use only with the documented historical UCI semantics; model association is not causal.",
+      "constraints": [
+        "parseable as numeric",
+        "finite",
+        "not NaN"
+      ],
+      "source_code_mapping": null
+    },
+    {
+      "name": "credit_amount",
+      "type": "finite_number",
+      "required": true,
+      "semantic_description": "Credit amount",
+      "source_field": "Attribute5",
+      "caveat": "Historical DM-denominated source quantity subjected to an undocumented monotonic transformation; not a literal contemporary monetary amount.",
+      "constraints": [
+        "parseable as numeric",
+        "finite",
+        "not NaN"
+      ],
+      "source_code_mapping": null
+    },
+    {
+      "name": "checking_account_status",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Status of existing checking account",
+      "source_field": "Attribute1",
+      "caveat": "Use only with the documented historical UCI semantics; model association is not causal.",
+      "accepted_categories": [
+        "A11",
+        "A12",
+        "A13",
+        "A14"
+      ],
+      "source_code_mapping": {
+        "A11": "... < 0 DM",
+        "A12": "0 <= ... < 200 DM",
+        "A13": "... >= 200 DM / salary assignments for at least 1 year",
+        "A14": "no checking account"
+      }
+    },
+    {
+      "name": "credit_history",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Credit history",
+      "source_field": "Attribute3",
+      "caveat": "Use only with the documented historical UCI semantics; model association is not causal.",
+      "accepted_categories": [
+        "A30",
+        "A31",
+        "A32",
+        "A33",
+        "A34"
+      ],
+      "source_code_mapping": {
+        "A30": "no credits taken / all credits paid back duly",
+        "A31": "all credits at this bank paid back duly",
+        "A32": "existing credits paid back duly till now",
+        "A33": "delay in paying off in the past",
+        "A34": "critical account / other credits existing (not at this bank)"
+      }
+    },
+    {
+      "name": "purpose",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Purpose",
+      "source_field": "Attribute4",
+      "caveat": "Use only with the documented historical UCI semantics; model association is not causal.",
+      "accepted_categories": [
+        "A40",
+        "A41",
+        "A42",
+        "A43",
+        "A44",
+        "A45",
+        "A46",
+        "A47",
+        "A48",
+        "A49",
+        "A410"
+      ],
+      "source_code_mapping": {
+        "A40": "car (new)",
+        "A41": "car (used)",
+        "A42": "furniture/equipment",
+        "A43": "radio/television",
+        "A44": "domestic appliances",
+        "A45": "repairs",
+        "A46": "education",
+        "A47": "(vacation - does not exist?)",
+        "A48": "retraining",
+        "A49": "business",
+        "A410": "others"
+      }
+    },
+    {
+      "name": "savings_account_status",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Savings account/bonds",
+      "source_field": "Attribute6",
+      "caveat": "Use only with the documented historical UCI semantics; model association is not causal.",
+      "accepted_categories": [
+        "A61",
+        "A62",
+        "A63",
+        "A64",
+        "A65"
+      ],
+      "source_code_mapping": {
+        "A61": "... < 100 DM",
+        "A62": "100 <= ... < 500 DM",
+        "A63": "500 <= ... < 1000 DM",
+        "A64": ".. >= 1000 DM",
+        "A65": "unknown / no savings account"
+      }
+    },
+    {
+      "name": "employment_duration",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Present employment since",
+      "source_field": "Attribute7",
+      "caveat": "Discretized duration category; categorical encoding does not imply equal spacing.",
+      "accepted_categories": [
+        "A71",
+        "A72",
+        "A73",
+        "A74",
+        "A75"
+      ],
+      "source_code_mapping": {
+        "A71": "unemployed",
+        "A72": "... < 1 year",
+        "A73": "1 <= ... < 4 years",
+        "A74": "4 <= ... < 7 years",
+        "A75": ".. >= 7 years"
+      }
+    },
+    {
+      "name": "installment_rate_percent",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Installment rate in percentage of disposable income",
+      "source_field": "Attribute8",
+      "caveat": "Discretized installment-rate category, not a literal percentage measurement.",
+      "accepted_categories": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source_code_mapping": {
+        "1": "documented discretized source level",
+        "2": "documented discretized source level",
+        "3": "documented discretized source level",
+        "4": "documented discretized source level"
+      }
+    },
+    {
+      "name": "other_debtors_guarantors",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Other debtors / guarantors",
+      "source_field": "Attribute10",
+      "caveat": "Use only with the documented historical UCI semantics; model association is not causal.",
+      "accepted_categories": [
+        "A101",
+        "A102",
+        "A103"
+      ],
+      "source_code_mapping": {
+        "A101": "none",
+        "A102": "co-applicant",
+        "A103": "guarantor"
+      }
+    },
+    {
+      "name": "residence_duration",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Present residence since",
+      "source_field": "Attribute11",
+      "caveat": "Discretized residence-duration category; not a continuous duration.",
+      "accepted_categories": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source_code_mapping": {
+        "1": "documented discretized source level",
+        "2": "documented discretized source level",
+        "3": "documented discretized source level",
+        "4": "documented discretized source level"
+      }
+    },
+    {
+      "name": "property",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Property",
+      "source_field": "Attribute12",
+      "caveat": "Ordered source concept represented categorically; unknown/no property is substantive.",
+      "accepted_categories": [
+        "A121",
+        "A122",
+        "A123",
+        "A124"
+      ],
+      "source_code_mapping": {
+        "A121": "real estate",
+        "A122": "if not A121: building society savings agreement / life insurance",
+        "A123": "if not A121/A122: car or other, not in Attribute6",
+        "A124": "unknown / no property"
+      }
+    },
+    {
+      "name": "other_installment_plans",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Other installment plans",
+      "source_field": "Attribute14",
+      "caveat": "Use only with the documented historical UCI semantics; model association is not causal.",
+      "accepted_categories": [
+        "A141",
+        "A142",
+        "A143"
+      ],
+      "source_code_mapping": {
+        "A141": "bank",
+        "A142": "stores",
+        "A143": "none"
+      }
+    },
+    {
+      "name": "housing",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Housing",
+      "source_field": "Attribute15",
+      "caveat": "Use only with the documented historical UCI semantics; model association is not causal.",
+      "accepted_categories": [
+        "A151",
+        "A152",
+        "A153"
+      ],
+      "source_code_mapping": {
+        "A151": "rent",
+        "A152": "own",
+        "A153": "for free"
+      }
+    },
+    {
+      "name": "existing_credits_count",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Number of existing credits at this bank",
+      "source_field": "Attribute16",
+      "caveat": "Discretized credit-count information, not an unrestricted count.",
+      "accepted_categories": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "source_code_mapping": {
+        "1": "documented discretized source level",
+        "2": "documented discretized source level",
+        "3": "documented discretized source level",
+        "4": "documented discretized source level"
+      }
+    },
+    {
+      "name": "job",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Job",
+      "source_field": "Attribute17",
+      "caveat": "Ordinal source concept represented categorically; codes are not numerical magnitudes.",
+      "accepted_categories": [
+        "A171",
+        "A172",
+        "A173",
+        "A174"
+      ],
+      "source_code_mapping": {
+        "A171": "unemployed / unskilled - non-resident",
+        "A172": "unskilled - resident",
+        "A173": "skilled employee / official",
+        "A174": "management / self-employed / highly qualified employee / officer"
+      }
+    },
+    {
+      "name": "dependents_count",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Number of people being liable to provide maintenance for",
+      "source_field": "Attribute18",
+      "caveat": "Binary/discretized quantity, not an unrestricted count.",
+      "accepted_categories": [
+        1,
+        2
+      ],
+      "source_code_mapping": {
+        "1": "documented discretized source level",
+        "2": "documented discretized source level"
+      }
+    },
+    {
+      "name": "telephone",
+      "type": "categorical",
+      "required": true,
+      "semantic_description": "Telephone",
+      "source_field": "Attribute19",
+      "caveat": "Use only with the documented historical UCI semantics; model association is not causal.",
+      "accepted_categories": [
+        "A191",
+        "A192"
+      ],
+      "source_code_mapping": {
+        "A191": "none",
+        "A192": "yes, registered under the customer's name"
+      }
+    }
+  ]
+}

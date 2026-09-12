@@ -1,0 +1,99 @@
+{
+  "project_name": "CreditScope",
+  "artifact_type": "trusted joblib-serialized calibrated classifier",
+  "model_version": "creditscope-model-1.0.0",
+  "created_utc": "2026-09-12T06:24:35.419718+00:00",
+  "artifact_filename": "creditscope_frozen_model.joblib",
+  "artifact_sha256": "c92e062e1cdde4965a7130be244cba8d01bc95e2b0d0cbb8a7feda43fbc3bcb7",
+  "raw_data_sha256": "4ce6007c9eb3dbcd67e7858773566b0eb3ff140033cf67b2d8a42b3a89edfb9d",
+  "split_sha256": "32fb4c9ac2cdb358e3bffd145cd97e1a393c14946888d46212d0b395523e99af",
+  "fold_membership_sha256": "513fc9249a4c00be3ba67fa99ea20a7ac76b653694130cf66733ea08f97d0b92",
+  "frozen_policy_sha256": "afee2e4ea82d438fa0ba638a8b7bdadaecbce9a4ada7da1f72d66866e4313afc",
+  "stage7_predictions_sha256": "dc43c8f81bfd993ec6735253be3fdc572ba44deda2743d4c7b9f8dbff41dce18",
+  "stage7_metrics_sha256": "c676b0f0ea0a02a4bfe8b681cc29903831aef83631def31c38eeb599879b124d",
+  "environment": {
+    "python": "3.12.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.4.2",
+    "xgboost": "3.4.1",
+    "joblib": "1.6.0"
+  },
+  "model_family": "fixed untuned XGBoost",
+  "model_hyperparameters": {
+    "objective": "binary:logistic",
+    "eval_metric": "logloss",
+    "n_estimators": 300,
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "random_state": 42,
+    "n_jobs": -1,
+    "tree_method": "hist"
+  },
+  "predictor_count": 17,
+  "predictor_names": [
+    "duration_months",
+    "credit_amount",
+    "checking_account_status",
+    "credit_history",
+    "purpose",
+    "savings_account_status",
+    "employment_duration",
+    "installment_rate_percent",
+    "other_debtors_guarantors",
+    "residence_duration",
+    "property",
+    "other_installment_plans",
+    "housing",
+    "existing_credits_count",
+    "job",
+    "dependents_count",
+    "telephone"
+  ],
+  "audit_only_exclusions": [
+    "personal_status_sex",
+    "age_years",
+    "foreign_worker"
+  ],
+  "target_semantics": {
+    "0": "good credit risk",
+    "1": "bad credit risk"
+  },
+  "positive_class": 1,
+  "calibration": {
+    "class": "sklearn.calibration.CalibratedClassifierCV",
+    "method": "sigmoid",
+    "ensemble": true,
+    "cv": "exact persisted Stage 4 five-fold development splits",
+    "n_jobs": null,
+    "calibrated_members": 5,
+    "aggregation": "arithmetic mean of calibrated member probabilities"
+  },
+  "decision_threshold": 0.16,
+  "comparison_operator": ">=",
+  "decision_rule": "bad credit risk if probability >= 0.16; good credit risk otherwise",
+  "cost_assumption": "5 * false_negative + false_positive",
+  "training_population": {
+    "split": "development",
+    "rows": 800,
+    "good_credit_risk": 560,
+    "bad_credit_risk": 240,
+    "holdout_rows_used": 0
+  },
+  "dataset_provenance": "UCI Statlog German Credit Data ID 144; South German Credit ID 573 supplies semantic corrections",
+  "intended_use": "Educational/research credit-risk decision-support prototype and portfolio demonstration",
+  "prohibited_use": "Automated lending approval, rejection, eligibility, pricing, or real credit decisions",
+  "serialization_security": "Joblib/pickle is unsafe for untrusted artifacts; load only this internally generated artifact after hash verification.",
+  "binary_reproducibility": "The joblib hash is version-sensitive and is not guaranteed across Python/library rebuilds.",
+  "round_trip_validation": {
+    "fixture_count": 5,
+    "probability_atol": 1e-12,
+    "maximum_absolute_probability_difference": 0.0,
+    "predictions_exact": true,
+    "labels_exact": true,
+    "five_members_preserved": true
+  }
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "selection_rule": "lowest_probability",
+    "source_row_id": "uci144-row-0407",
+    "input": {
+      "duration_months": 24,
+      "credit_amount": 2197,
+      "checking_account_status": "A14",
+      "credit_history": "A34",
+      "purpose": "A41",
+      "savings_account_status": "A65",
+      "employment_duration": "A74",
+      "installment_rate_percent": 4,
+      "other_debtors_guarantors": "A101",
+      "residence_duration": 4,
+      "property": "A123",
+      "other_installment_plans": "A143",
+      "housing": "A152",
+      "existing_credits_count": 2,
+      "job": "A173",
+      "dependents_count": 2,
+      "telephone": "A192"
+    },
+    "expected": {
+      "probability_bad_risk": 0.11150867520184712,
+      "predicted_class": 0,
+      "predicted_label": "good_credit_risk",
+      "threshold": 0.16,
+      "model_version": "creditscope-model-1.0.0"
+    }
+  },
+  {
+    "selection_rule": "closest_to_threshold_0_16",
+    "source_row_id": "uci144-row-0028",
+    "input": {
+      "duration_months": 12,
+      "credit_amount": 409,
+      "checking_account_status": "A13",
+      "credit_history": "A31",
+      "purpose": "A43",
+      "savings_account_status": "A64",
+      "employment_duration": "A73",
+      "installment_rate_percent": 3,
+      "other_debtors_guarantors": "A101",
+      "residence_duration": 3,
+      "property": "A121",
+      "other_installment_plans": "A143",
+      "housing": "A151",
+      "existing_credits_count": 2,
+      "job": "A173",
+      "dependents_count": 1,
+      "telephone": "A191"
+    },
+    "expected": {
+      "probability_bad_risk": 0.15983326720871888,
+      "predicted_class": 0,
+      "predicted_label": "good_credit_risk",
+      "threshold": 0.16,
+      "model_version": "creditscope-model-1.0.0"
+    }
+  },
+  {
+    "selection_rule": "closest_to_moderate_reference_0_35",
+    "source_row_id": "uci144-row-0738",
+    "input": {
+      "duration_months": 18,
+      "credit_amount": 4380,
+      "checking_account_status": "A11",
+      "credit_history": "A32",
+      "purpose": "A40",
+      "savings_account_status": "A62",
+      "employment_duration": "A73",
+      "installment_rate_percent": 3,
+      "other_debtors_guarantors": "A101",
+      "residence_duration": 4,
+      "property": "A123",
+      "other_installment_plans": "A143",
+      "housing": "A152",
+      "existing_credits_count": 1,
+      "job": "A172",
+      "dependents_count": 2,
+      "telephone": "A192"
+    },
+    "expected": {
+      "probability_bad_risk": 0.349589290168932,
+      "predicted_class": 1,
+      "predicted_label": "bad_credit_risk",
+      "threshold": 0.16,
+      "model_version": "creditscope-model-1.0.0"
+    }
+  },
+  {
+    "selection_rule": "highest_probability",
+    "source_row_id": "uci144-row-0335",
+    "input": {
+      "duration_months": 24,
+      "credit_amount": 4110,
+      "checking_account_status": "A11",
+      "credit_history": "A30",
+      "purpose": "A42",
+      "savings_account_status": "A61",
+      "employment_duration": "A75",
+      "installment_rate_percent": 3,
+      "other_debtors_guarantors": "A101",
+      "residence_duration": 4,
+      "property": "A124",
+      "other_installment_plans": "A141",
+      "housing": "A151",
+      "existing_credits_count": 2,
+      "job": "A173",
+      "dependents_count": 2,
+      "telephone": "A191"
+    },
+    "expected": {
+      "probability_bad_risk": 0.8146401505263453,
+      "predicted_class": 1,
+      "predicted_label": "bad_credit_risk",
+      "threshold": 0.16,
+      "model_version": "creditscope-model-1.0.0"
+    }
+  },
+  {
+    "selection_rule": "maximum_minimum_categorical_hamming_distance",
+    "source_row_id": "uci144-row-0051",
+    "input": {
+      "duration_months": 24,
+      "credit_amount": 2333,
+      "checking_account_status": "A12",
+      "credit_history": "A33",
+      "purpose": "A42",
+      "savings_account_status": "A65",
+      "employment_duration": "A72",
+      "installment_rate_percent": 4,
+      "other_debtors_guarantors": "A101",
+      "residence_duration": 2,
+      "property": "A122",
+      "other_installment_plans": "A141",
+      "housing": "A152",
+      "existing_credits_count": 1,
+      "job": "A172",
+      "dependents_count": 1,
+      "telephone": "A191"
+    },
+    "expected": {
+      "probability_bad_risk": 0.32351256210345397,
+      "predicted_class": 1,
+      "predicted_label": "bad_credit_risk",
+      "threshold": 0.16,
+      "model_version": "creditscope-model-1.0.0"
+    }
+  }
+]

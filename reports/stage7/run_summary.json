@@ -1,0 +1,71 @@
+{
+  "stage": "Stage 7 one-time final locked holdout evaluation",
+  "completed_utc": "2026-09-11T17:18:44.060852+00:00",
+  "environment": {
+    "python": "3.12.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.4.2",
+    "xgboost": "3.4.1"
+  },
+  "locked_hashes": {
+    "raw_snapshot": "4ce6007c9eb3dbcd67e7858773566b0eb3ff140033cf67b2d8a42b3a89edfb9d",
+    "split_manifest": "32fb4c9ac2cdb358e3bffd145cd97e1a393c14946888d46212d0b395523e99af",
+    "stage4_fold_membership": "513fc9249a4c00be3ba67fa99ea20a7ac76b653694130cf66733ea08f97d0b92",
+    "stage4_oof": "c1e96b552ca7f5510f8aa9eda88db128e9cfbdd8ef30ca8535fac69646c486f9",
+    "stage5_nested_oof": "eecccdb9ae24d747562b5914c5f54bc5838688df4019b013552d1b87217460f5",
+    "stage6_nested_oof": "a11703e95c1fd17c05de3c2636aba4bab74bdd3d93a992140cefd0b58bbda621",
+    "stage6_threshold_search": "4f738292925c51242b34fad89d8a9c763c19014a3de3afea31f3968c3e7ac1a9",
+    "frozen_policy": "afee2e4ea82d438fa0ba638a8b7bdadaecbce9a4ada7da1f72d66866e4313afc"
+  },
+  "frozen_policy_sha256": "afee2e4ea82d438fa0ba638a8b7bdadaecbce9a4ada7da1f72d66866e4313afc",
+  "pre_access_manifest_sha256": "bd989e2c1172c3822d3c80e4e033d33af9d761c76802d31f1e0d81eb267e1a01",
+  "final_holdout_predictions_sha256": "dc43c8f81bfd993ec6735253be3fdc572ba44deda2743d4c7b9f8dbff41dce18",
+  "model_configuration": {
+    "objective": "binary:logistic",
+    "eval_metric": "logloss",
+    "n_estimators": 300,
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "random_state": 42,
+    "n_jobs": -1,
+    "tree_method": "hist"
+  },
+  "calibration_configuration": {
+    "class": "sklearn.calibration.CalibratedClassifierCV",
+    "method": "sigmoid",
+    "cv": "exact persisted Stage 4 five-fold development splits",
+    "ensemble": true,
+    "n_jobs": null,
+    "ensemble_members": 5,
+    "aggregation": "arithmetic mean of calibrated probabilities"
+  },
+  "threshold": 0.16,
+  "predefined_metrics": {
+    "roc_auc": 0.804642857142857,
+    "average_precision": 0.6792123840621137,
+    "precision_bad_credit_risk": 0.39849624060150374,
+    "recall_bad_credit_risk": 0.8833333333333333,
+    "f1_bad_credit_risk": 0.5492227979274611,
+    "balanced_accuracy": 0.655952380952381,
+    "specificity": 0.42857142857142855,
+    "brier_score": 0.15233791214909861,
+    "log_loss": 0.47587769298045446,
+    "accuracy": 0.565,
+    "true_negative": 60,
+    "false_positive": 80,
+    "false_negative": 7,
+    "true_positive": 53,
+    "total_cost": 115,
+    "average_cost": 0.575
+  },
+  "confidence_intervals_calculated": false,
+  "alternative_thresholds_evaluated": false,
+  "alternative_models_evaluated": false,
+  "post_holdout_model_changes": false,
+  "shap_performed": false,
+  "holdout_access_count": 1,
+  "holdout_rows": 200
+}

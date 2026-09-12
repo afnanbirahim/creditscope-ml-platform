@@ -1,0 +1,6 @@
+member,encoded_feature_count,calibrator_method,calibrator_a,calibrator_b,shap_output
+1,64,sigmoid,-4.523785976581622,2.5473481966227904,raw_tree_margin
+2,64,sigmoid,-4.122728525566906,2.179824670448125,raw_tree_margin
+3,64,sigmoid,-4.1726249581351365,2.312963955256032,raw_tree_margin
+4,64,sigmoid,-3.4277541978401858,2.0304464655265835,raw_tree_margin
+5,64,sigmoid,-2.707239731354746,1.5999938390735295,raw_tree_margin

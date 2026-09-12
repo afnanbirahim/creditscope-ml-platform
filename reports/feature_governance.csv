@@ -1,0 +1,21 @@
+internal_field,official_meaning,classification,rationale,stage3_action
+checking_account_status,Status of existing checking account,potential proxy; requires later modelling decision,May encode financial access or socioeconomic position.,"Assess necessity, encoding, and proxy risk before modelling."
+duration_months,Duration,ordinary candidate predictor,No specific concern identified at this stage.,Retain as a candidate; assess preprocessing before modelling.
+credit_history,Credit history,ordinary candidate predictor; requires timing review,"Credit history is substantively relevant, but observation timing must precede the decision.",Confirm application-time availability and encode without imposing an undocumented order.
+purpose,Purpose,ordinary candidate predictor,No specific concern identified at this stage.,Retain as a candidate; assess preprocessing before modelling.
+credit_amount,Credit amount,ordinary candidate predictor,No specific concern identified at this stage.,Retain as a candidate; assess preprocessing before modelling.
+savings_account_status,Savings account/bonds,potential proxy; requires later modelling decision,May encode socioeconomic position or access to financial products.,"Assess necessity, missing-like semantics, encoding, and proxy risk."
+employment_duration,Present employment since,potential proxy; requires later modelling decision,Employment duration may reflect socioeconomic circumstances.,Review fairness implications and encoding before modelling.
+installment_rate_percent,Installment rate in percentage of disposable income,ordinary candidate predictor,No specific concern identified at this stage.,Retain as a candidate; assess preprocessing before modelling.
+personal_status_sex,Personal status and sex,potentially sensitive/protected; requires later modelling decision,Directly combines sex and personal/marital status; legal treatment is jurisdiction-specific.,"Decide exclusion, audit-only use, or constrained inclusion before modelling."
+other_debtors_guarantors,Other debtors / guarantors,ordinary candidate predictor,No specific concern identified at this stage.,Retain as a candidate; assess preprocessing before modelling.
+residence_duration,Present residence since,potential proxy; requires later modelling decision,Residential stability may proxy socioeconomic circumstances.,Clarify encoding and review proxy risk before modelling.
+property,Property,potential proxy; requires later modelling decision,Asset ownership may encode socioeconomic position.,"Assess necessity, encoding, and proxy risk before modelling."
+age_years,Age,potentially sensitive/protected; requires later modelling decision,Age is demographic; legal treatment is jurisdiction-specific.,"Decide exclusion, audit-only use, or constrained inclusion before modelling."
+other_installment_plans,Other installment plans,ordinary candidate predictor,No specific concern identified at this stage.,Retain as a candidate; assess preprocessing before modelling.
+housing,Housing,potential proxy; requires later modelling decision,Housing status may encode socioeconomic position.,Assess necessity and proxy risk before modelling.
+existing_credits_count,Number of existing credits at this bank,ordinary candidate predictor; requires timing review,The count may be relevant but must be available at application time.,Confirm application-time availability before modelling.
+job,Job,potential proxy; requires later modelling decision,Occupation grouping may encode socioeconomic position.,Review fairness implications and encoding before modelling.
+dependents_count,Number of people being liable to provide maintenance for,potential proxy; requires later modelling decision,Household dependency information may relate to family circumstances.,Review necessity and proxy risk before modelling.
+telephone,Telephone,potential proxy; requires later modelling decision,"Telephone registration may proxy access, stability, or socioeconomic position.",Assess necessity and proxy risk before modelling.
+foreign_worker,Foreign worker,potentially sensitive/protected; requires later modelling decision,Foreign-worker status is demographic; legal treatment is jurisdiction-specific.,"Decide exclusion, audit-only use, or constrained inclusion before modelling."

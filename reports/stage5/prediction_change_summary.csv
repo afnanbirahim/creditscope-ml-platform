@@ -1,0 +1,14 @@
+measure,value
+classification_agreement_count,744.0
+classification_agreement_proportion,0.93
+classifications_changed,56.0
+changed_wrong_to_correct,23.0
+changed_correct_to_wrong,33.0
+probability_change_mean,0.0020582146584638672
+probability_change_std,0.08454419031345153
+absolute_probability_change_mean,0.061605208012333615
+absolute_probability_change_median,0.043338410556316403
+absolute_probability_change_p90,0.1363634169101715
+absolute_probability_change_max,0.3647614121437073
+absolute_probability_change_ge_0_10,156.0
+absolute_probability_change_ge_0_20,28.0

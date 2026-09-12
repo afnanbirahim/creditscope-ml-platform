@@ -1,0 +1,66 @@
+uci_field,internal_field,official_meaning,official_type,analytical_type,unit,category_code,official_category_meaning,source
+Attribute1,checking_account_status,Status of existing checking account,Categorical,ordered categorical with a special no-account category,not documented,A11,... < 0 DM,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute1,checking_account_status,Status of existing checking account,Categorical,ordered categorical with a special no-account category,not documented,A12,0 <= ... < 200 DM,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute1,checking_account_status,Status of existing checking account,Categorical,ordered categorical with a special no-account category,not documented,A13,... >= 200 DM / salary assignments for at least 1 year,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute1,checking_account_status,Status of existing checking account,Categorical,ordered categorical with a special no-account category,not documented,A14,no checking account,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute2,duration_months,Duration,Integer,discrete numerical,months,,,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute3,credit_history,Credit history,Categorical,nominal categorical,not documented,A30,no credits taken / all credits paid back duly,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute3,credit_history,Credit history,Categorical,nominal categorical,not documented,A31,all credits at this bank paid back duly,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute3,credit_history,Credit history,Categorical,nominal categorical,not documented,A32,existing credits paid back duly till now,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute3,credit_history,Credit history,Categorical,nominal categorical,not documented,A33,delay in paying off in the past,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute3,credit_history,Credit history,Categorical,nominal categorical,not documented,A34,critical account / other credits existing (not at this bank),https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute4,purpose,Purpose,Categorical,nominal categorical,not documented,A40,car (new),https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute4,purpose,Purpose,Categorical,nominal categorical,not documented,A41,car (used),https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute4,purpose,Purpose,Categorical,nominal categorical,not documented,A42,furniture/equipment,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute4,purpose,Purpose,Categorical,nominal categorical,not documented,A43,radio/television,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute4,purpose,Purpose,Categorical,nominal categorical,not documented,A44,domestic appliances,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute4,purpose,Purpose,Categorical,nominal categorical,not documented,A45,repairs,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute4,purpose,Purpose,Categorical,nominal categorical,not documented,A46,education,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute4,purpose,Purpose,Categorical,nominal categorical,not documented,A47,(vacation - does not exist?),https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute4,purpose,Purpose,Categorical,nominal categorical,not documented,A48,retraining,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute4,purpose,Purpose,Categorical,nominal categorical,not documented,A49,business,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute4,purpose,Purpose,Categorical,nominal categorical,not documented,A410,others,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute5,credit_amount,Credit amount,Integer,discrete numerical,not documented,,,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute6,savings_account_status,Savings account/bonds,Categorical,ordered categorical with a special unknown/no-account category,not documented,A61,... < 100 DM,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute6,savings_account_status,Savings account/bonds,Categorical,ordered categorical with a special unknown/no-account category,not documented,A62,100 <= ... < 500 DM,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute6,savings_account_status,Savings account/bonds,Categorical,ordered categorical with a special unknown/no-account category,not documented,A63,500 <= ... < 1000 DM,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute6,savings_account_status,Savings account/bonds,Categorical,ordered categorical with a special unknown/no-account category,not documented,A64,.. >= 1000 DM,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute6,savings_account_status,Savings account/bonds,Categorical,ordered categorical with a special unknown/no-account category,not documented,A65,unknown / no savings account,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute7,employment_duration,Present employment since,Categorical,ordinal categorical,not documented,A71,unemployed,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute7,employment_duration,Present employment since,Categorical,ordinal categorical,not documented,A72,... < 1 year,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute7,employment_duration,Present employment since,Categorical,ordinal categorical,not documented,A73,1 <= ... < 4 years,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute7,employment_duration,Present employment since,Categorical,ordinal categorical,not documented,A74,4 <= ... < 7 years,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute7,employment_duration,Present employment since,Categorical,ordinal categorical,not documented,A75,.. >= 7 years,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute8,installment_rate_percent,Installment rate in percentage of disposable income,Integer,discrete numerical percentage,percentage of disposable income,,,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute9,personal_status_sex,Personal status and sex,Categorical,nominal categorical (compound field),not documented,A91,male: divorced/separated,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute9,personal_status_sex,Personal status and sex,Categorical,nominal categorical (compound field),not documented,A92,female: divorced/separated/married,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute9,personal_status_sex,Personal status and sex,Categorical,nominal categorical (compound field),not documented,A93,male: single,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute9,personal_status_sex,Personal status and sex,Categorical,nominal categorical (compound field),not documented,A94,male: married/widowed,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute9,personal_status_sex,Personal status and sex,Categorical,nominal categorical (compound field),not documented,A95,female: single,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute10,other_debtors_guarantors,Other debtors / guarantors,Categorical,nominal categorical,not documented,A101,none,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute10,other_debtors_guarantors,Other debtors / guarantors,Categorical,nominal categorical,not documented,A102,co-applicant,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute10,other_debtors_guarantors,Other debtors / guarantors,Categorical,nominal categorical,not documented,A103,guarantor,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute11,residence_duration,Present residence since,Integer,ordinal integer (unit not documented by UCI),not documented,,,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute12,property,Property,Categorical,nominal categorical,not documented,A121,real estate,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute12,property,Property,Categorical,nominal categorical,not documented,A122,if not A121: building society savings agreement / life insurance,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute12,property,Property,Categorical,nominal categorical,not documented,A123,"if not A121/A122: car or other, not in Attribute6",https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute12,property,Property,Categorical,nominal categorical,not documented,A124,unknown / no property,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute13,age_years,Age,Integer,discrete numerical,years,,,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute14,other_installment_plans,Other installment plans,Categorical,nominal categorical,not documented,A141,bank,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute14,other_installment_plans,Other installment plans,Categorical,nominal categorical,not documented,A142,stores,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute14,other_installment_plans,Other installment plans,Categorical,nominal categorical,not documented,A143,none,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute15,housing,Housing,Categorical,nominal categorical,not documented,A151,rent,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute15,housing,Housing,Categorical,nominal categorical,not documented,A152,own,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute15,housing,Housing,Categorical,nominal categorical,not documented,A153,for free,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute16,existing_credits_count,Number of existing credits at this bank,Integer,count,credits,,,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute17,job,Job,Categorical,ordinal categorical,not documented,A171,unemployed / unskilled - non-resident,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute17,job,Job,Categorical,ordinal categorical,not documented,A172,unskilled - resident,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute17,job,Job,Categorical,ordinal categorical,not documented,A173,skilled employee / official,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute17,job,Job,Categorical,ordinal categorical,not documented,A174,management / self-employed / highly qualified employee / officer,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute18,dependents_count,Number of people being liable to provide maintenance for,Integer,count,people,,,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute19,telephone,Telephone,Binary,binary categorical,not documented,A191,none,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute19,telephone,Telephone,Binary,binary categorical,not documented,A192,"yes, registered under the customer's name",https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute20,foreign_worker,Foreign worker,Binary,binary categorical,not documented,A201,yes,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+Attribute20,foreign_worker,Foreign worker,Binary,binary categorical,not documented,A202,no,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+class,credit_risk_class,Credit-risk class,Binary target,binary categorical,not applicable,1,good credit risk,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata
+class,credit_risk_class,Credit-risk class,Binary target,binary categorical,not applicable,2,bad credit risk,https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata

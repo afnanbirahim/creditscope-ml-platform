@@ -1,0 +1,4 @@
+model,evaluation_population,threshold,roc_auc,average_precision,precision_bad_credit_risk,recall_bad_credit_risk,f1_bad_credit_risk,balanced_accuracy,brier_score,accuracy,true_negative,false_positive,false_negative,true_positive,false_negative_cost,false_positive_cost,total_cost,average_cost
+Logistic Regression,development out-of-fold predictions,0.5,0.7629538690476191,0.5710270816616344,0.5752688172043011,0.44583333333333336,0.5023474178403756,0.6523809523809524,0.17621734856038324,0.735,481,79,133,107,5,1,744,0.93
+Random Forest,development out-of-fold predictions,0.5,0.7768973214285715,0.5816170211472335,0.6546762589928058,0.37916666666666665,0.48021108179419525,0.6467261904761905,0.16891625999999998,0.75375,512,48,149,91,5,1,793,0.99125
+XGBoost,development out-of-fold predictions,0.5,0.7809821428571428,0.5817821927158534,0.612565445026178,0.4875,0.54292343387471,0.6776785714285715,0.1708740099430572,0.75375,486,74,123,117,5,1,689,0.86125

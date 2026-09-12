@@ -1,0 +1,17 @@
+{
+  "selection_metric": "average_precision",
+  "best_mean_inner_average_precision": 0.6011345302188377,
+  "best_parameters": {
+    "subsample": 0.7,
+    "reg_lambda": 10.0,
+    "reg_alpha": 0.01,
+    "n_estimators": 350,
+    "min_child_weight": 3,
+    "max_depth": 5,
+    "learning_rate": 0.03,
+    "gamma": 1.0,
+    "colsample_bytree": 0.8
+  },
+  "unbiased_performance_estimate": false,
+  "estimator_refit_on_all_development_rows": false
+}

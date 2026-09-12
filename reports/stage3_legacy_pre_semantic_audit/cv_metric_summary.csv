@@ -1,0 +1,21 @@
+model,metric,fold_mean,fold_std
+Dummy prior,roc_auc,0.5,0.0
+Dummy prior,average_precision,0.3,0.0
+Dummy prior,precision_bad_credit_risk,0.0,0.0
+Dummy prior,recall_bad_credit_risk,0.0,0.0
+Dummy prior,f1_bad_credit_risk,0.0,0.0
+Dummy prior,balanced_accuracy,0.5,0.0
+Dummy prior,brier_score,0.20999999999999996,0.0
+Dummy prior,accuracy,0.7,0.0
+Dummy prior,default_threshold_total_cost,240.0,0.0
+Dummy prior,default_threshold_average_cost,1.5,0.0
+Logistic Regression,roc_auc,0.7707217261904763,0.04593658047616575
+Logistic Regression,average_precision,0.5834963795031658,0.0866423356279463
+Logistic Regression,precision_bad_credit_risk,0.5749453575799965,0.0882049718378962
+Logistic Regression,recall_bad_credit_risk,0.4416666666666667,0.10765008902303178
+Logistic Regression,f1_bad_credit_risk,0.49614496886222714,0.09387944563269227
+Logistic Regression,balanced_accuracy,0.6511904761904761,0.05516600064850652
+Logistic Regression,brier_score,0.1730005802190112,0.01942082612772927
+Logistic Regression,accuracy,0.735,0.03867937111691449
+Logistic Regression,default_threshold_total_cost,149.6,25.812787528664934
+Logistic Regression,default_threshold_average_cost,0.9349999999999999,0.16132992205415586

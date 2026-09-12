@@ -1,0 +1,14 @@
+feature,documented_cardinality,observed_cardinality,minimum_observed_category_count
+checking_account_status,4,4,63
+credit_history,5,5,40
+purpose,11,10,9
+savings_account_status,5,5,48
+employment_duration,5,5,62
+personal_status_sex,5,4,50
+other_debtors_guarantors,3,3,41
+property,4,4,154
+other_installment_plans,3,3,47
+housing,3,3,108
+job,4,4,22
+telephone,2,2,404
+foreign_worker,2,2,37

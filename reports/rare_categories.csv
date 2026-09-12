@@ -1,0 +1,4 @@
+feature,category_code,category_meaning,count,percentage,observed
+purpose,A44,domestic appliances,12,0.012,True
+purpose,A48,retraining,9,0.009,True
+purpose,A410,others,12,0.012,True

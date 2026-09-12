@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "creditscope"
+version = "0.1.0"
+description = "Explainable credit-risk decision-support research prototype."
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+  "joblib>=1.3,<2.0",
+  "matplotlib>=3.8,<4.0",
+  "pandas>=2.1,<3.0",
+  "scikit-learn==1.4.2",
+  "shap==0.52.0",
+  "tabulate>=0.9,<1.0",
+  "ucimlrepo>=0.0.7,<1.0",
+  "xgboost>=2.0,<4.0",
+]
+
+[project.optional-dependencies]
+api = [
+  "fastapi==0.141.1",
+  "httpx==0.28.1",
+  "pydantic==2.13.5",
+  "uvicorn==0.52.4",
+]
+ui = [
+  "httpx==0.28.1",
+  "streamlit==1.63.0",
+]
+dev = [
+  "ipykernel>=6.29,<7.0",
+  "nbclient>=0.10,<1.0",
+  "nbformat>=5.10,<6.0",
+  "pytest>=8.0,<9.0",
+  "ruff>=0.6,<1.0",
+]
+
+[project.scripts]
+creditscope-verify-data = "creditscope.data:main"
+creditscope-eda = "creditscope.eda:main"
+creditscope-baseline = "creditscope.stage3:main"
+creditscope-tree-comparison = "creditscope.stage4:main"
+creditscope-tune-xgboost = "creditscope.stage5:main"
+creditscope-freeze-policy = "creditscope.stage6:main"
+creditscope-explainability-audit = "creditscope.stage8:main"
+creditscope-build-frozen-model = "creditscope.build_frozen_model:main"
+creditscope-predict = "creditscope.inference:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q --basetemp=work/pytest-runtime"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"

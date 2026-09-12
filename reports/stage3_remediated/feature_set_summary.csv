@@ -1,0 +1,21 @@
+feature,role,feature_type,baseline_encoding,included_in_baseline_prediction
+duration_months,predictive,continuous/quantitative,median imputation then standard scaling,True
+credit_amount,predictive,continuous/quantitative,median imputation then standard scaling,True
+checking_account_status,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+credit_history,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+purpose,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+savings_account_status,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+employment_duration,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+installment_rate_percent,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+other_debtors_guarantors,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+residence_duration,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+property,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+other_installment_plans,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+housing,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+existing_credits_count,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+job,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+dependents_count,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+telephone,predictive,categorical or discretized/ordinal,most-frequent imputation then one-hot encoding,True
+personal_status_sex,audit only,direct sensitive/demographic attribute,excluded from preprocessing and prediction,False
+age_years,audit only,direct sensitive/demographic attribute,excluded from preprocessing and prediction,False
+foreign_worker,audit only,direct sensitive/demographic attribute,excluded from preprocessing and prediction,False

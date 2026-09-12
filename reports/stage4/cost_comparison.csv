@@ -1,0 +1,4 @@
+model,threshold,true_negative,false_positive,false_negative,true_positive,total_cost,average_cost
+Logistic Regression,0.5,481,79,133,107,744,0.93
+Random Forest,0.5,512,48,149,91,793,0.99125
+XGBoost,0.5,486,74,123,117,689,0.86125

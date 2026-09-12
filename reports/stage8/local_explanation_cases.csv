@@ -1,0 +1,6 @@
+selection_rule,source_row_id,bad_credit_risk,stage6_oof_probability,prediction_at_frozen_threshold_0_16,outcome_type,top_underlying_tree_score_contributors
+low_probability,uci144-row-0009,0,0.0,0,true_negative,savings_account_status=-0.466245; credit_amount=-0.449533; purpose=+0.440437; credit_history=+0.420654; checking_account_status=-0.320018
+closest_to_threshold,uci144-row-0701,1,0.1599438497796654,0,false_negative,savings_account_status=-0.472579; checking_account_status=-0.466242; purpose=+0.409103; credit_history=+0.402771; duration_months=-0.248354
+high_probability,uci144-row-0877,0,0.959263637661934,1,false_positive,savings_account_status=-0.503349; credit_history=+0.388846; checking_account_status=-0.378846; purpose=+0.354646; other_installment_plans=+0.202317
+false_positive,uci144-row-0651,0,0.8781848549842834,1,false_positive,savings_account_status=-0.571891; duration_months=+0.377215; purpose=+0.292071; checking_account_status=-0.284263; credit_history=+0.228916
+false_negative,uci144-row-0336,1,0.0106382966041564,0,false_negative,duration_months=-0.771002; purpose=+0.491129; credit_history=+0.465590; savings_account_status=-0.454938; checking_account_status=-0.230876

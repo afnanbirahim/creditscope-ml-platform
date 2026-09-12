@@ -1,0 +1,2 @@
+roc_auc,average_precision,precision_bad_credit_risk,recall_bad_credit_risk,f1_bad_credit_risk,balanced_accuracy,specificity,brier_score,log_loss,accuracy,true_negative,false_positive,false_negative,true_positive,total_cost,average_cost
+0.804642857142857,0.6792123840621137,0.39849624060150374,0.8833333333333333,0.5492227979274611,0.655952380952381,0.42857142857142855,0.15233791214909861,0.47587769298045446,0.565,60,80,7,53,115,0.575

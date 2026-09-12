@@ -1,0 +1,9 @@
+error_group,feature,n,mean,median,minimum,maximum
+true_positive,duration_months,219,25.273972602739725,24.0,6,60
+true_positive,credit_amount,219,3769.780821917808,2462.0,433,15945
+true_negative,duration_months,224,15.866071428571429,12.0,4,60
+true_negative,credit_amount,224,2485.78125,2049.5,338,8858
+false_positive,duration_months,336,21.38095238095238,18.0,4,60
+false_positive,credit_amount,336,3254.2291666666665,2333.0,276,15653
+false_negative,duration_months,21,16.333333333333332,15.0,6,30
+false_negative,credit_amount,21,3612.1428571428573,2538.0,433,12680

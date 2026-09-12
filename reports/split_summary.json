@@ -1,0 +1,23 @@
+{
+  "total_rows": 1000,
+  "development_rows": 800,
+  "test_rows": 200,
+  "target_counts": {
+    "development": {
+      "good_credit_risk_0": 560,
+      "bad_credit_risk_1": 240
+    },
+    "test": {
+      "good_credit_risk_0": 140,
+      "bad_credit_risk_1": 60
+    }
+  },
+  "random_state": 42,
+  "test_fraction": 0.2,
+  "stratified": true,
+  "method": "sklearn.model_selection.train_test_split",
+  "row_identifier": "one-based immutable UCI source-row position",
+  "dataset_sha256": "726d2da93620b9603bf8d6e98331cba66b848ee9656f18058515697f469f3086",
+  "manifest_sha256": "32fb4c9ac2cdb358e3bffd145cd97e1a393c14946888d46212d0b395523e99af",
+  "final_test_performance_evaluated": false
+}

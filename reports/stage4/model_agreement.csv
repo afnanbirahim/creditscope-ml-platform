@@ -1,0 +1,6 @@
+comparison,criterion,observation_count,proportion_of_development
+Logistic Regression vs Random Forest,same class at threshold 0.50,695,0.86875
+Logistic Regression vs XGBoost,same class at threshold 0.50,689,0.86125
+Random Forest vs XGBoost,same class at threshold 0.50,714,0.8925
+All three models,same class at threshold 0.50,649,0.81125
+All three models,maximum OOF probability spread at least 0.20,229,0.28625

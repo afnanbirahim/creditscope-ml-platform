@@ -1,0 +1,7 @@
+metric,value
+observations,1000
+candidate_features,20
+source_target_columns,1
+analysis_binary_target_columns,1
+missing_cells,0
+duplicate_rows_including_targets,0

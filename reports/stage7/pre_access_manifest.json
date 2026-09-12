@@ -1,0 +1,64 @@
+{
+  "utc_timestamp": "2026-09-11T17:18:02.584676+00:00",
+  "stage": "Stage 7 pre-access gate",
+  "environment": {
+    "python": "3.12.0",
+    "numpy": "2.5.3",
+    "scipy": "1.18.1",
+    "scikit_learn": "1.4.2",
+    "xgboost": "3.4.1"
+  },
+  "locked_hashes": {
+    "raw_snapshot": "4ce6007c9eb3dbcd67e7858773566b0eb3ff140033cf67b2d8a42b3a89edfb9d",
+    "split_manifest": "32fb4c9ac2cdb358e3bffd145cd97e1a393c14946888d46212d0b395523e99af",
+    "stage4_fold_membership": "513fc9249a4c00be3ba67fa99ea20a7ac76b653694130cf66733ea08f97d0b92",
+    "stage4_oof": "c1e96b552ca7f5510f8aa9eda88db128e9cfbdd8ef30ca8535fac69646c486f9",
+    "stage5_nested_oof": "eecccdb9ae24d747562b5914c5f54bc5838688df4019b013552d1b87217460f5",
+    "stage6_nested_oof": "a11703e95c1fd17c05de3c2636aba4bab74bdd3d93a992140cefd0b58bbda621",
+    "stage6_threshold_search": "4f738292925c51242b34fad89d8a9c763c19014a3de3afea31f3968c3e7ac1a9",
+    "frozen_policy": "afee2e4ea82d438fa0ba638a8b7bdadaecbce9a4ada7da1f72d66866e4313afc"
+  },
+  "frozen_policy_sha256": "afee2e4ea82d438fa0ba638a8b7bdadaecbce9a4ada7da1f72d66866e4313afc",
+  "fixed_threshold": 0.16,
+  "fixed_calibration_method": "sigmoid",
+  "ensemble": true,
+  "calibrated_classifier_n_jobs": null,
+  "predefined_metrics": [
+    "roc_auc",
+    "average_precision",
+    "precision_bad_credit_risk",
+    "recall_bad_credit_risk",
+    "f1_bad_credit_risk",
+    "balanced_accuracy",
+    "specificity",
+    "brier_score",
+    "log_loss",
+    "accuracy",
+    "true_negative",
+    "false_positive",
+    "false_negative",
+    "true_positive",
+    "total_cost",
+    "average_cost"
+  ],
+  "development_rows": 800,
+  "holdout_rows": 200,
+  "development_class_counts": {
+    "good_credit_risk": 560,
+    "bad_credit_risk": 240
+  },
+  "holdout_class_counts_from_locked_manifest": {
+    "good_credit_risk": 140,
+    "bad_credit_risk": 60
+  },
+  "unique_development_ids": 800,
+  "unique_holdout_ids": 200,
+  "overlap": 0,
+  "source_code_hashes": {
+    "stage7_implementation": "05ebc6498e6de3deeb64501f316e15f5a0b805bd237371512b3376393cdb4889",
+    "stage7_tests": "ddb28acdc7a8124ec73efc72393853d8e9d04a4eb33edd8bd771514162027f49"
+  },
+  "frozen_policy_validated": "frozen_before_final_holdout_access",
+  "holdout_predictions_generated": false,
+  "holdout_features_or_targets_loaded_for_evaluation": false
+}

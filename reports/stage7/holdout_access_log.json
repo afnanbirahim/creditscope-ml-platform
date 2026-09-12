@@ -1,0 +1,14 @@
+{
+  "access_started_utc": "2026-09-11T17:18:42.699149+00:00",
+  "holdout_source_opened": true,
+  "holdout_features_selected": true,
+  "holdout_targets_viewed": true,
+  "predictions_generated": true,
+  "status": "completed once; rerun prohibited",
+  "source_opened_utc": "2026-09-11T17:18:42.790453+00:00",
+  "holdout_rows": 200,
+  "holdout_selected_utc": "2026-09-11T17:18:43.848632+00:00",
+  "predictions_generated_utc": "2026-09-11T17:18:43.975148+00:00",
+  "final_holdout_predictions_sha256": "dc43c8f81bfd993ec6735253be3fdc572ba44deda2743d4c7b9f8dbff41dce18",
+  "evaluation_completed_utc": "2026-09-11T17:18:44.063851+00:00"
+}

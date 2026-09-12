@@ -1,0 +1,3 @@
+actual_class,predicted_good_credit_risk_0,predicted_bad_credit_risk_1
+good_credit_risk_0,60,80
+bad_credit_risk_1,7,53

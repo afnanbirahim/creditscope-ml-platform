@@ -1,0 +1,55 @@
+{
+  "source": {
+    "repository": "UCI Machine Learning Repository",
+    "dataset_id": 144,
+    "name": "Statlog (German Credit Data)",
+    "url": "https://archive.ics.uci.edu/dataset/144/statlog%2Bgerman%2Bcredit%2Bdata",
+    "doi": "10.24432/C5NC77",
+    "license": "CC BY 4.0"
+  },
+  "observed": {
+    "rows": 1000,
+    "features": 20,
+    "targets": 1,
+    "target_name": "class",
+    "target_class_counts": {
+      "1": 700,
+      "2": 300
+    },
+    "missing_cells": 0,
+    "duplicate_rows_including_target": 0,
+    "feature_columns": [
+      "Attribute1",
+      "Attribute2",
+      "Attribute3",
+      "Attribute4",
+      "Attribute5",
+      "Attribute6",
+      "Attribute7",
+      "Attribute8",
+      "Attribute9",
+      "Attribute10",
+      "Attribute11",
+      "Attribute12",
+      "Attribute13",
+      "Attribute14",
+      "Attribute15",
+      "Attribute16",
+      "Attribute17",
+      "Attribute18",
+      "Attribute19",
+      "Attribute20"
+    ]
+  },
+  "checks": {
+    "official_dataset_id": true,
+    "documented_dimensions": true,
+    "no_missing_values": true,
+    "target_labels_are_1_and_2": true,
+    "modeling_performed": false
+  },
+  "raw_snapshot": {
+    "path": "data/raw/german_credit.csv",
+    "sha256": "4ce6007c9eb3dbcd67e7858773566b0eb3ff140033cf67b2d8a42b3a89edfb9d"
+  }
+}

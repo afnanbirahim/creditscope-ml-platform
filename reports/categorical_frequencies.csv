@@ -1,0 +1,57 @@
+feature,category_code,category_meaning,count,percentage,observed
+checking_account_status,A11,... < 0 DM,274,0.274,True
+checking_account_status,A12,0 <= ... < 200 DM,269,0.269,True
+checking_account_status,A13,... >= 200 DM / salary assignments for at least 1 year,63,0.063,True
+checking_account_status,A14,no checking account,394,0.394,True
+credit_history,A30,no credits taken / all credits paid back duly,40,0.04,True
+credit_history,A31,all credits at this bank paid back duly,49,0.049,True
+credit_history,A32,existing credits paid back duly till now,530,0.53,True
+credit_history,A33,delay in paying off in the past,88,0.088,True
+credit_history,A34,critical account / other credits existing (not at this bank),293,0.293,True
+purpose,A40,car (new),234,0.234,True
+purpose,A41,car (used),103,0.103,True
+purpose,A42,furniture/equipment,181,0.181,True
+purpose,A43,radio/television,280,0.28,True
+purpose,A44,domestic appliances,12,0.012,True
+purpose,A45,repairs,22,0.022,True
+purpose,A46,education,50,0.05,True
+purpose,A47,(vacation - does not exist?),0,0.0,False
+purpose,A48,retraining,9,0.009,True
+purpose,A49,business,97,0.097,True
+purpose,A410,others,12,0.012,True
+savings_account_status,A61,... < 100 DM,603,0.603,True
+savings_account_status,A62,100 <= ... < 500 DM,103,0.103,True
+savings_account_status,A63,500 <= ... < 1000 DM,63,0.063,True
+savings_account_status,A64,.. >= 1000 DM,48,0.048,True
+savings_account_status,A65,unknown / no savings account,183,0.183,True
+employment_duration,A71,unemployed,62,0.062,True
+employment_duration,A72,... < 1 year,172,0.172,True
+employment_duration,A73,1 <= ... < 4 years,339,0.339,True
+employment_duration,A74,4 <= ... < 7 years,174,0.174,True
+employment_duration,A75,.. >= 7 years,253,0.253,True
+personal_status_sex,A91,male: divorced/separated,50,0.05,True
+personal_status_sex,A92,female: divorced/separated/married,310,0.31,True
+personal_status_sex,A93,male: single,548,0.548,True
+personal_status_sex,A94,male: married/widowed,92,0.092,True
+personal_status_sex,A95,female: single,0,0.0,False
+other_debtors_guarantors,A101,none,907,0.907,True
+other_debtors_guarantors,A102,co-applicant,41,0.041,True
+other_debtors_guarantors,A103,guarantor,52,0.052,True
+property,A121,real estate,282,0.282,True
+property,A122,if not A121: building society savings agreement / life insurance,232,0.232,True
+property,A123,"if not A121/A122: car or other, not in Attribute6",332,0.332,True
+property,A124,unknown / no property,154,0.154,True
+other_installment_plans,A141,bank,139,0.139,True
+other_installment_plans,A142,stores,47,0.047,True
+other_installment_plans,A143,none,814,0.814,True
+housing,A151,rent,179,0.179,True
+housing,A152,own,713,0.713,True
+housing,A153,for free,108,0.108,True
+job,A171,unemployed / unskilled - non-resident,22,0.022,True
+job,A172,unskilled - resident,200,0.2,True
+job,A173,skilled employee / official,630,0.63,True
+job,A174,management / self-employed / highly qualified employee / officer,148,0.148,True
+telephone,A191,none,596,0.596,True
+telephone,A192,"yes, registered under the customer's name",404,0.404,True
+foreign_worker,A201,yes,963,0.963,True
+foreign_worker,A202,no,37,0.037,True

@@ -1,0 +1,4 @@
+calibration_method,selection_count,selection_percentage,mean_selected_inner_brier,mean_outer_brier_when_selected
+none,0,0.0,,
+sigmoid,1,0.2,0.1702280820755632,0.17103198596022298
+isotonic,4,0.8,0.16804517260746804,0.16765916533565975

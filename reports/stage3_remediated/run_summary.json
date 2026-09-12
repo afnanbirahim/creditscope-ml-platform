@@ -1,0 +1,27 @@
+{
+  "stage": "3R semantic remediation",
+  "authoritative_baseline": true,
+  "legacy_results_preserved": true,
+  "development_rows_used_for_cv": 800,
+  "final_test_rows_isolated": 200,
+  "predictive_feature_count": 17,
+  "numeric_feature_count": 2,
+  "one_hot_feature_count": 15,
+  "audit_attribute_count": 3,
+  "cv_folds": 5,
+  "random_state": 42,
+  "default_threshold": 0.5,
+  "convergence_warnings": 0,
+  "figures_created": 4,
+  "final_test_performance_evaluated": false,
+  "test_rows_used_for_fitting": false,
+  "hyperparameter_tuning_performed": false,
+  "threshold_optimization_performed": false,
+  "resampling_performed": false,
+  "class_weight": null,
+  "models_trained": [
+    "DummyClassifier",
+    "LogisticRegression"
+  ],
+  "split_manifest_sha256": "32fb4c9ac2cdb358e3bffd145cd97e1a393c14946888d46212d0b395523e99af"
+}

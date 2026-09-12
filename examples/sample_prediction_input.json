@@ -1,0 +1,19 @@
+{
+  "duration_months": 18,
+  "credit_amount": 4380,
+  "checking_account_status": "A11",
+  "credit_history": "A32",
+  "purpose": "A40",
+  "savings_account_status": "A62",
+  "employment_duration": "A73",
+  "installment_rate_percent": 3,
+  "other_debtors_guarantors": "A101",
+  "residence_duration": 4,
+  "property": "A123",
+  "other_installment_plans": "A143",
+  "housing": "A152",
+  "existing_credits_count": 1,
+  "job": "A172",
+  "dependents_count": 2,
+  "telephone": "A192"
+}

@@ -1,0 +1,13 @@
+audit_attribute,group,n
+personal_status_sex,A91 — male: divorced/separated,41
+personal_status_sex,A92 — female: divorced/separated/married,249
+personal_status_sex,A93 — male: single,430
+personal_status_sex,A94 — male: married/widowed,80
+personal_status_sex,A95 — female: single,0
+age_band,under 25,110
+age_band,25–34,333
+age_band,35–44,204
+age_band,45–54,95
+age_band,55+,58
+foreign_worker,A201 — yes,769
+foreign_worker,A202 — no,31

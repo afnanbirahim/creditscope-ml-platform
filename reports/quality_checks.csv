@@ -1,0 +1,19 @@
+check,flagged_rows_or_cells
+missing cells,0
+duplicate complete rows,0
+nonpositive duration_months,0
+nonpositive credit_amount,0
+nonpositive age_years,0
+out-of-domain codes: checking_account_status,0
+out-of-domain codes: credit_history,0
+out-of-domain codes: purpose,0
+out-of-domain codes: savings_account_status,0
+out-of-domain codes: employment_duration,0
+out-of-domain codes: personal_status_sex,0
+out-of-domain codes: other_debtors_guarantors,0
+out-of-domain codes: property,0
+out-of-domain codes: other_installment_plans,0
+out-of-domain codes: housing,0
+out-of-domain codes: job,0
+out-of-domain codes: telephone,0
+out-of-domain codes: foreign_worker,0

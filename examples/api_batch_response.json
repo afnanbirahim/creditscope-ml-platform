@@ -1,0 +1,16 @@
+[
+    {
+      "probability_bad_risk": 0.11150867520184712,
+      "predicted_class": 0,
+      "predicted_label": "good_credit_risk",
+      "threshold": 0.16,
+      "model_version": "creditscope-model-1.0.0"
+    },
+    {
+      "probability_bad_risk": 0.349589290168932,
+      "predicted_class": 1,
+      "predicted_label": "bad_credit_risk",
+      "threshold": 0.16,
+      "model_version": "creditscope-model-1.0.0"
+    }
+]
