@@ -65,4 +65,3 @@ services:
 networks:
   creditscope-private:
     driver: bridge
-    internal: true

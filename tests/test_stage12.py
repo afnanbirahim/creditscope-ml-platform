@@ -115,7 +115,9 @@ def test_compose_is_two_service_health_gated_and_hardened() -> None:
     assert "condition: service_healthy" in source
     assert source.count("read_only: true") == 2
     assert source.count("no-new-privileges:true") == 2
-    assert "internal: true" in source
+    assert "networks:\n  creditscope-private:\n    driver: bridge" in source
+    assert source.count("      - creditscope-private") == 2
+    assert "internal: true" not in source
     lowered = source.lower()
     assert "privileged:" not in lowered
     assert "docker.sock" not in lowered

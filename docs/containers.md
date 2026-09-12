@@ -13,7 +13,7 @@ claims remain pending until that output is reviewed.
 ```mermaid
 flowchart LR
     U[User browser] --> UI[Streamlit UI container]
-    UI -->|HTTP on private Compose network| API[FastAPI container]
+    UI -->|HTTP on user-defined Compose bridge| API[FastAPI container]
     API --> INF[Stage 9 inference layer]
     INF --> MODEL[Frozen calibrated ensemble]
 ```
@@ -88,8 +88,9 @@ the stack down.
 
 The API image and Compose health check call `GET /health`; they do not invoke the
 model. The UI health check uses Streamlit's `/_stcore/health`. Compose starts the
-UI only after the API is healthy. The UI calls the API at `http://api:8000` on an
-internal Compose network and never falls back to local inference.
+UI only after the API is healthy. The UI calls the API at `http://api:8000` on a
+private user-defined Compose bridge and never falls back to local inference.
+Host-published API and UI ports are restricted to `127.0.0.1`.
 
 ## Build-context and data boundary
 
@@ -110,4 +111,3 @@ upload, or user-controlled pickle path is present.
   service diagnostics.
 - Run `docker compose down --volumes --remove-orphans` after a failed attempt
   before retrying a purely infrastructure-related failure.
-

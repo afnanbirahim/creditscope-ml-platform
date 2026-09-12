@@ -91,8 +91,9 @@ raw traces. It does not load the model, reproduce threshold logic, request audit
 attributes, retain payloads, or access holdout evidence. See `docs/frontend.md`.
 
 Stage 12 adds separate, non-root API and UI container definitions, a private
-two-service Compose topology, strict build-context controls, frozen-model Linux
-verification, and push/pull-request CI. The Codex sandbox cannot access Docker;
+user-defined Compose bridge with loopback-only host ports, strict build-context
+controls, frozen-model Linux verification, and push/pull-request CI. The Codex
+sandbox cannot access Docker;
 therefore container runtime, Linux artifact compatibility, and Compose parity
 remain an explicit external-validation checkpoint until the documented
 PowerShell workflow is run and its output reviewed. See `docs/containers.md` and

@@ -328,8 +328,8 @@ The complete audit is documented in `docs/statlog_semantics_audit.md`, with the
   canonical Stage 9 joblib artifact; neither image fits, rebuilds, recalibrates,
   tunes, or evaluates a model.
 - FastAPI and Streamlit run as separate non-root services. Streamlit reaches the
-  API over a private Compose network and contains no model artifact or direct
-  inference dependency.
+  API over a private user-defined Compose bridge and contains no model artifact
+  or direct inference dependency. Published host ports remain loopback-only.
 - The Docker context is allow-listed. Raw, development, holdout, audit, report,
   notebook, environment, cache, and Git content is excluded from runtime images.
 - Linux verification must pass the model hash, manifest, architecture, 17-field

@@ -32,7 +32,7 @@ After quality succeeds, a separate Ubuntu job:
 - builds the API and UI images;
 - runs the canonical-model verifier inside the Linux API image;
 - starts the two-service Compose stack and waits for health;
-- checks the UI-to-API private-network path;
+- checks the UI-to-API user-defined bridge-network path;
 - runs the end-to-end golden response test; and
 - always tears down Compose.
 
@@ -68,4 +68,3 @@ Docker checks:
 CI does not use secrets, deploy services, publish images, upload raw or holdout
 data, expose sample payloads as artifacts, rerun holdout evaluation, calculate
 performance metrics, or execute model-development entry points.
-
