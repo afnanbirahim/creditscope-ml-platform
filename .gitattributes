@@ -1,0 +1,5 @@
+# Frozen evidence files are byte-sensitive and must not undergo EOL normalization.
+artifacts/model/creditscope_frozen_model.joblib -text
+reports/stage6/frozen_model_policy.json -text whitespace=cr-at-eol
+reports/stage7/final_holdout_predictions.csv -text
+reports/stage7/final_holdout_metrics.csv -text
