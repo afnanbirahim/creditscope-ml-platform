@@ -4,9 +4,9 @@
 
 Stage 12 defines separate Linux containers for the existing FastAPI and
 Streamlit services. The definitions do not retrain, rebuild, or reserialize the
-model. Docker is not visible inside the Codex sandbox, so runtime validation must
-be performed from a normal PowerShell session using the commands below. Runtime
-claims remain pending until that output is reviewed.
+model. External Docker Desktop validation and the GitHub-hosted Linux workflow
+both passed before Stage 13. Docker remains unavailable inside the Codex sandbox,
+so the commands below are the reproducible validation path.
 
 ## Architecture
 

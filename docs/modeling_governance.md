@@ -209,6 +209,19 @@ evidence about actual lending economics or a jurisdiction-specific requirement.
 - No container registry publication, cloud deployment, credentials, privileged
   mode, Docker socket mount, or Stage 13 work is authorized.
 
+## Stage 13 release-candidate boundary
+
+- Release presentation may quote only committed Stage 7 results and frozen
+  metadata; it may not derive new holdout evidence or reinterpret results to
+  reopen model development.
+- `creditscope-model-1.0.0` remains immutable even though the planned repository
+  release is also numbered `v1.0.0`. Future model-policy changes require new
+  governance and a new model version.
+- License selection, screenshots, fresh-clone rehearsal, final release commit,
+  hosted CI, tag, and GitHub Release are explicit manual gates.
+- The project remains a portfolio/educational reference implementation without
+  claims of live operation, regulatory compliance, fairness, or lending fitness.
+
 ## Stage 8 post-evaluation governance
 
 - Stage 7 performance and the frozen policy are permanent; explainability or

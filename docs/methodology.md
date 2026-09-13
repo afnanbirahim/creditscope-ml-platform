@@ -339,6 +339,19 @@ The complete audit is documented in `docs/statlog_semantics_audit.md`, with the
 - CI validates quality, frozen evidence, inference, API, UI, Docker builds, and
   Compose parity. It has no secrets, publishing, deployment, holdout analysis,
   or model-development path.
-- Docker is unavailable inside the Codex sandbox. Runtime and Compose results are
-  therefore pending external execution and must not be claimed before their
-  actual output is reviewed.
+- Docker is unavailable inside the Codex sandbox. Runtime and Compose validation
+  was therefore executed externally and then confirmed by the green hosted Linux
+  workflow before Stage 13.
+
+## Stage 13: portfolio release candidate
+
+- Model development remains closed. Stage 13 changes presentation, navigation,
+  public-repository hygiene, release documentation, and reproducibility guidance
+  only.
+- Public claims trace to existing frozen artifacts. Stage 7 rows are not rescored
+  and no metric, SHAP, subgroup, threshold, calibration, or model analysis is
+  added.
+- Repository release `v1.0.0`, API version, and model version are separate
+  concepts. No release tag or GitHub Release is created in this stage.
+- A fresh-clone rehearsal, screenshots, final release commit, and final hosted CI
+  run remain manual release gates.

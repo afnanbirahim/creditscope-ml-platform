@@ -7,6 +7,11 @@ committed application and canonical frozen model; it does not train, rebuild,
 tune, deploy, or upload data. The workflow requires no secrets and grants only
 read access to repository contents.
 
+The hosted workflow was green at Stage 13 entry commit `b8dd5bd`. Linux CI
+previously exposed two portability issues—frozen-file byte normalization and a
+Compose bridge marked `internal`—which were corrected without changing inference
+semantics.
+
 ## Quality job
 
 The Ubuntu 24.04 quality job:
