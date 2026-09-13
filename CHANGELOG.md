@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.0.0 — Unreleased
+## v1.0.0 — 2026-09-13
 
 ### Added
 
@@ -23,4 +23,3 @@
   not an industry standard or claim of real lending economics.
 - CreditScope remains an educational/research decision-support prototype and is
   not suitable for automated lending decisions.
-

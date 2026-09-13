@@ -217,8 +217,9 @@ evidence about actual lending economics or a jurisdiction-specific requirement.
 - `creditscope-model-1.0.0` remains immutable even though the planned repository
   release is also numbered `v1.0.0`. Future model-policy changes require new
   governance and a new model version.
-- License selection, screenshots, fresh-clone rehearsal, final release commit,
-  hosted CI, tag, and GitHub Release are explicit manual gates.
+- Application screenshots, fresh-clone rehearsal, and release-candidate hosted CI
+  passed. The no-license and no-`CITATION.cff` decisions are explicit deferrals;
+  the closeout commit, its CI run, tag, and GitHub Release remain manual gates.
 - The project remains a portfolio/educational reference implementation without
   claims of live operation, regulatory compliance, fairness, or lending fitness.
 

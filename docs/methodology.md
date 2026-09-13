@@ -353,5 +353,6 @@ The complete audit is documented in `docs/statlog_semantics_audit.md`, with the
   added.
 - Repository release `v1.0.0`, API version, and model version are separate
   concepts. No release tag or GitHub Release is created in this stage.
-- A fresh-clone rehearsal, screenshots, final release commit, and final hosted CI
-  run remain manual release gates.
+- Application screenshots, public rendering review, Docker validation, and the
+  fresh-clone rehearsal passed for the release candidate. The closeout commit,
+  its hosted CI run, annotated tag, and GitHub Release remain pending.

@@ -21,19 +21,44 @@ work. No release tag or GitHub Release exists yet.
 | Compose configuration and health | PASS | Stage 12 external validation and hosted CI |
 | UI-to-API and host-side smoke | PASS | Stage 12 external validation and hosted CI |
 | Linux canonical-artifact parity | PASS | Stage 12 container verifier and hosted CI |
-| GitHub Actions on starting commit | PASS | User-confirmed green hosted workflow |
+| GitHub Actions on release-candidate commit | PASS | Hosted workflow green at `0acd122` |
 | Documentation navigation and relative links | PASS | Automated local-target scan found zero broken links |
-| README rendering | PENDING | Manual GitHub preview |
-| Mermaid rendering | PENDING | Manual GitHub preview |
-| Fresh-clone rehearsal | PENDING | Run in a different directory |
-| Application screenshots | PENDING | Capture manually using development/golden input |
-| Software license decision | PENDING | Owner must select/approve a license |
-| Citation metadata decision | PENDING | Author identity/preferred citation required |
-| Final Stage 13 commit | PENDING | User-managed Git mutation |
-| Final CI run on release commit | PENDING | Must be green after push |
-| Release notes reviewed | PENDING | Review `CHANGELOG.md` Unreleased section |
+| Genuine application screenshots | PASS | Captured and committed from the running application |
+| Local Streamlit inspection | PASS | Manually inspected |
+| Local FastAPI verification | PASS | Manually verified |
+| Docker release-candidate validation | PASS | API/UI images and Compose workflow passed |
+| Canonical artifact in Linux | PASS | Strict load and integrity verification passed |
+| API `/health` | PASS | Manual release validation |
+| API `/model-info` | PASS | Manual release validation |
+| Golden `/predict` request | PASS | Manual release validation |
+| UI-to-API container connectivity | PASS | Manual release validation |
+| Compose golden smoke test | PASS | Manual release validation |
+| Compose teardown | PASS | Containers and network removed cleanly |
+| Public GitHub rendering | PASS | Manually reviewed |
+| README rendering | PASS | Manually reviewed on GitHub |
+| Mermaid rendering | PASS | Manually reviewed on GitHub |
+| Release-candidate commit pushed | PASS | `0acd122f10aec77467fc9204bb93a3abce5c77a3` |
+| Fresh-clone repository state | PASS | Public clone was clean and contained no `.venv` or `.python` |
+| Fresh-clone frozen hashes | PASS | All four canonical hashes matched |
+| Fresh-clone Docker build | PASS | Completed successfully |
+| Fresh-clone Linux artifact verification | PASS | Canonical artifact and golden evidence passed |
+| Fresh-clone Compose startup | PASS | Services reached healthy state |
+| Fresh-clone `/health` and `/model-info` | PASS | Both endpoints passed |
+| Fresh-clone golden prediction | PASS | Frozen endpoint result passed |
+| Fresh-clone UI-to-API connectivity | PASS | Service-name HTTP path passed |
+| Fresh-clone teardown and Git state | PASS | Clean teardown; working tree remained clean |
+| Software license decision | PASS | No software LICENSE for v1.0.0; explicitly deferred owner decision |
+| Citation metadata decision | PASS | `CITATION.cff` intentionally deferred; no metadata invented |
+| Final Stage 13 closeout commit | PENDING | User-managed Git mutation after this documentation closeout |
+| Final hosted CI for closeout commit | PENDING | Must be green after push |
+| Release notes reviewed | PENDING | Review dated `CHANGELOG.md` entry before tagging |
 | `v1.0.0` tag and GitHub Release | PENDING | Explicit later authorization required |
 | Post-release hash verification | PENDING | Verify after tag/release |
+
+The absence of a software LICENSE and `CITATION.cff` is deliberate for v1.0.0,
+not accidental. Dataset attribution and third-party terms remain documented
+separately. Public visibility must not be interpreted as an open-source software
+license. ORCID, DOI, affiliation, and preferred citation metadata are not guessed.
 
 ## Fresh-clone rehearsal
 
