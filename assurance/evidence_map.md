@@ -4,19 +4,40 @@ This map connects future assurance questions to identified release evidence. It
 does not answer those questions or assign assurance ratings. Evidence IDs refer
 to `evidence_register.csv`.
 
+Stage A2 applies this evidence to intended use in
+`intended_use_assessment.md`. That assurance-generated assessment does not
+replace or redefine registered v1.0.0 source evidence.
+
 ## Evidence classes
 
 - **CANONICAL_FROZEN**: the four byte-identical artifacts explicitly designated
   as canonical for the released model, policy, holdout predictions, and holdout
   metrics.
-- **SUPPORTING_FROZEN**: machine-readable evidence whose current release bytes
-  support reconstruction or challenge but which is not one of the four
+- **SUPPORTING_FROZEN**: machine-readable release evidence anchored to the exact
+  blob bytes stored by Git at `v1.0.0`, but which is not one of the four
   canonical artifacts.
 - **SUPPORTING**: documentation, source, or control definitions relevant to an
-  assurance question. Their existence does not independently prove execution.
+  assurance question. Their registered SHA-256 is likewise computed from the
+  exact `v1.0.0` Git blob. Their existence does not independently prove
+  execution.
 - **GENERATED_ASSURANCE**: evidence created by the assurance process. No such
   item is treated as source evidence in the initial register; the register is
   not self-hashed.
+
+## Integrity basis and checkout portability
+
+The four `CANONICAL_FROZEN` artifacts retain their externally established
+raw-file SHA-256 values. They are verified without text normalization in both
+the working tree and the released Git tree.
+
+For tracked `SUPPORTING_FROZEN` and `SUPPORTING` evidence, the registered
+SHA-256 is calculated from the exact blob bytes stored at `v1.0.0`. The verifier
+also requires the corresponding current `HEAD` blob to be identical and uses
+Git's own path-aware clean filter to prove that the checked-out file maps back
+to that released blob. This permits only transformations already defined by
+Git's checkout/clean rules, such as platform line endings. It does not hash
+parsed JSON, apply an assurance-defined normalization, or allow a genuine
+content change to pass.
 
 ## Assurance-question navigation
 
@@ -118,10 +139,12 @@ after that release on a separate branch and does not redefine the tagged tree.
    `51db046543c2d95c35058469067ba9f988a6133b`.
 3. The four canonical paths and expected raw-byte SHA-256 values are fixed in
    the evidence register and in the independent assurance verifier.
-4. The verifier hashes bytes before any possible joblib deserialization and
-   fails on a missing or mismatched canonical artifact.
-5. Supporting release evidence is registered with its current byte hash so
-   later changes or substitutions are detectable.
+4. The verifier hashes canonical bytes before any possible joblib
+   deserialization and fails on a missing or mismatched canonical artifact.
+5. Supporting release evidence is registered using the SHA-256 of its exact
+   `v1.0.0` Git blob. Current `HEAD` and the path-aware clean-filter identity of
+   the working file must match that release blob, so later content changes or
+   substitutions remain detectable across operating systems.
 6. Stage A0/A1 begins on `assurance-case-v1.1.0` at the release commit.
    Assurance additions therefore occur after release on a separate branch.
    They may describe or challenge v1.0.0 but cannot change the tag or the

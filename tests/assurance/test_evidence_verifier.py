@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -11,14 +12,44 @@ import pytest
 from scripts.verify_assurance_evidence import (
     CANONICAL_EXPECTED_HASHES,
     REGISTER_COLUMNS,
+    RELEASE_COMMIT,
+    RELEASE_TAG,
     EvidenceVerificationError,
     read_evidence_register,
     validate_evidence_register,
+    validate_register_structure,
     verify_expected_hashes,
+    verify_git_anchored_file,
+    verify_release_custody,
 )
 
 ROOT = Path(__file__).resolve().parents[2]
 REGISTER = ROOT / "assurance" / "evidence_register.csv"
+
+
+def _git(repository: Path, *arguments: str) -> None:
+    subprocess.run(
+        ["git", *arguments],
+        cwd=repository,
+        check=True,
+        capture_output=True,
+    )
+
+
+def _make_text_release_repository(tmp_path: Path) -> tuple[Path, str]:
+    repository = tmp_path / "release-repository"
+    repository.mkdir()
+    _git(repository, "init", "--quiet")
+    _git(repository, "config", "user.name", "Assurance Test")
+    _git(repository, "config", "user.email", "assurance-test@example.invalid")
+    (repository / ".gitattributes").write_bytes(b"*.txt text\n")
+    evidence = repository / "evidence.txt"
+    evidence.write_bytes(b"line one\nline two\n")
+    _git(repository, "add", ".gitattributes", "evidence.txt")
+    _git(repository, "commit", "--quiet", "-m", "test release")
+    _git(repository, "tag", "-a", RELEASE_TAG, "-m", "test release")
+    release_hash = hashlib.sha256(b"line one\nline two\n").hexdigest()
+    return repository, release_hash
 
 
 def test_canonical_expected_hash_definitions_are_exact() -> None:
@@ -39,6 +70,7 @@ def test_canonical_expected_hash_definitions_are_exact() -> None:
 
 
 def test_current_canonical_artifacts_and_register_verify() -> None:
+    verify_release_custody(ROOT)
     assert verify_expected_hashes(ROOT, CANONICAL_EXPECTED_HASHES) == (
         CANONICAL_EXPECTED_HASHES
     )
@@ -47,7 +79,7 @@ def test_current_canonical_artifacts_and_register_verify() -> None:
     assert len(calculated) == len(rows)
 
 
-def test_tampered_temporary_evidence_fails(tmp_path: Path) -> None:
+def test_canonical_raw_byte_tamper_fails(tmp_path: Path) -> None:
     relative_path = "evidence.bin"
     evidence = tmp_path / relative_path
     evidence.write_bytes(b"original")
@@ -67,17 +99,75 @@ def test_missing_temporary_evidence_fails(tmp_path: Path) -> None:
         verify_expected_hashes(tmp_path, {"missing.bin": "0" * 64})
 
 
+@pytest.mark.parametrize(
+    "checkout_bytes",
+    [b"line one\nline two\n", b"line one\r\nline two\r\n"],
+    ids=["linux-lf", "windows-crlf"],
+)
+def test_git_anchored_text_accepts_git_defined_checkout_eol(
+    tmp_path: Path, checkout_bytes: bytes
+) -> None:
+    repository, release_hash = _make_text_release_repository(tmp_path)
+    (repository / "evidence.txt").write_bytes(checkout_bytes)
+    assert (
+        verify_git_anchored_file(repository, "evidence.txt", release_hash)
+        == release_hash
+    )
+
+
+def test_git_anchored_text_rejects_genuine_content_change(tmp_path: Path) -> None:
+    repository, release_hash = _make_text_release_repository(tmp_path)
+    (repository / "evidence.txt").write_bytes(b"line one\r\nchanged\r\n")
+    with pytest.raises(EvidenceVerificationError, match="Working-tree content"):
+        verify_git_anchored_file(repository, "evidence.txt", release_hash)
+
+
+def test_git_anchored_text_requires_working_file(tmp_path: Path) -> None:
+    repository, release_hash = _make_text_release_repository(tmp_path)
+    (repository / "evidence.txt").unlink()
+    with pytest.raises(EvidenceVerificationError, match="is missing"):
+        verify_git_anchored_file(repository, "evidence.txt", release_hash)
+
+
 def test_register_schema_is_exact() -> None:
     with REGISTER.open("r", encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle)
         assert tuple(reader.fieldnames or ()) == REGISTER_COLUMNS
 
 
-def test_duplicate_evidence_ids_are_detected(tmp_path: Path) -> None:
+def test_duplicate_evidence_ids_are_detected_independently() -> None:
     rows = read_evidence_register(REGISTER)
     duplicated = rows + [dict(rows[0], path="duplicate/path.bin")]
     with pytest.raises(EvidenceVerificationError, match="Duplicate evidence ID"):
-        validate_evidence_register(ROOT, duplicated)
+        validate_register_structure(duplicated)
+
+
+def test_duplicate_evidence_paths_are_detected_independently() -> None:
+    rows = read_evidence_register(REGISTER)
+    duplicated = rows + [dict(rows[0], evidence_id="EV-TEST-999")]
+    with pytest.raises(EvidenceVerificationError, match="Duplicate evidence path"):
+        validate_register_structure(duplicated)
+
+
+def test_malformed_sha256_is_rejected_structurally() -> None:
+    rows = read_evidence_register(REGISTER)
+    malformed = [dict(rows[0], sha256="not-a-sha256"), *rows[1:]]
+    with pytest.raises(EvidenceVerificationError, match="Malformed registered SHA-256"):
+        validate_register_structure(malformed)
+
+
+def test_invalid_evidence_status_is_rejected_structurally() -> None:
+    rows = read_evidence_register(REGISTER)
+    malformed = [dict(rows[0], frozen_status="UNCONTROLLED"), *rows[1:]]
+    with pytest.raises(EvidenceVerificationError, match="Unknown frozen status"):
+        validate_register_structure(malformed)
+
+
+def test_repository_relative_path_is_enforced_structurally() -> None:
+    rows = read_evidence_register(REGISTER)
+    malformed = [dict(rows[0], path="../outside.bin"), *rows[1:]]
+    with pytest.raises(EvidenceVerificationError, match="escapes the repository"):
+        validate_register_structure(malformed)
 
 
 def test_canonical_register_rows_use_expected_hashes() -> None:
@@ -88,3 +178,8 @@ def test_canonical_register_rows_use_expected_hashes() -> None:
         if row["frozen_status"] == "CANONICAL_FROZEN"
     }
     assert canonical == CANONICAL_EXPECTED_HASHES
+
+
+def test_release_constants_are_frozen() -> None:
+    assert RELEASE_TAG == "v1.0.0"
+    assert RELEASE_COMMIT == "51db046543c2d95c35058469067ba9f988a6133b"

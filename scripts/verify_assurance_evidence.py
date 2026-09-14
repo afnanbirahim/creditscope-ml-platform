@@ -6,6 +6,7 @@ import argparse
 import csv
 import hashlib
 import re
+import subprocess
 import sys
 from collections.abc import Iterable, Mapping
 from pathlib import Path, PurePosixPath
@@ -24,6 +25,8 @@ CANONICAL_EXPECTED_HASHES: dict[str, str] = {
         "c676b0f0ea0a02a4bfe8b681cc29903831aef83631def31c38eeb599879b124d"
     ),
 }
+RELEASE_TAG = "v1.0.0"
+RELEASE_COMMIT = "51db046543c2d95c35058469067ba9f988a6133b"
 
 REGISTER_COLUMNS = (
     "evidence_id",
@@ -73,6 +76,102 @@ def _validate_repository_relative_path(value: str) -> None:
         )
 
 
+def _git(repository_root: Path, *arguments: str) -> bytes:
+    command = [
+        "git",
+        "-c",
+        f"safe.directory={repository_root.as_posix()}",
+        *arguments,
+    ]
+    result = subprocess.run(
+        command,
+        cwd=repository_root,
+        check=False,
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        detail = result.stderr.decode("utf-8", errors="replace").strip()
+        raise EvidenceVerificationError(
+            f"Git evidence query failed ({' '.join(arguments)}): {detail}"
+        )
+    return result.stdout
+
+
+def verify_release_custody(repository_root: Path) -> None:
+    """Require the annotated release tag to resolve to the frozen release commit."""
+    tag_type = _git(repository_root, "cat-file", "-t", RELEASE_TAG).decode().strip()
+    if tag_type != "tag":
+        raise EvidenceVerificationError(
+            f"{RELEASE_TAG} must be an annotated tag, got {tag_type!r}"
+        )
+    resolved = (
+        _git(repository_root, "rev-list", "-n", "1", RELEASE_TAG).decode().strip()
+    )
+    if resolved != RELEASE_COMMIT:
+        raise EvidenceVerificationError(
+            f"{RELEASE_TAG} resolves to {resolved}, expected {RELEASE_COMMIT}"
+        )
+
+
+def git_blob_bytes(repository_root: Path, revision: str, relative_path: str) -> bytes:
+    """Read exact version-controlled blob bytes without checkout conversion."""
+    _validate_repository_relative_path(relative_path)
+    return _git(repository_root, "show", f"{revision}:{relative_path}")
+
+
+def verify_git_anchored_file(
+    repository_root: Path,
+    relative_path: str,
+    expected_release_sha256: str,
+    release_ref: str = RELEASE_TAG,
+) -> str:
+    """Verify release blob, current HEAD, and checked-out Git content identity."""
+    _validate_repository_relative_path(relative_path)
+    if not SHA256_PATTERN.fullmatch(expected_release_sha256):
+        raise EvidenceVerificationError(
+            f"Malformed registered SHA-256 for {relative_path}"
+        )
+
+    working_path = repository_root / PurePosixPath(relative_path)
+    if not working_path.is_file():
+        raise EvidenceVerificationError(f"Registered evidence is missing: {relative_path}")
+
+    release_bytes = git_blob_bytes(repository_root, release_ref, relative_path)
+    release_sha256 = hashlib.sha256(release_bytes).hexdigest()
+    if release_sha256 != expected_release_sha256:
+        raise EvidenceVerificationError(
+            f"Release Git-blob SHA-256 mismatch for {relative_path}: "
+            f"expected {expected_release_sha256}, got {release_sha256}"
+        )
+
+    head_bytes = git_blob_bytes(repository_root, "HEAD", relative_path)
+    if head_bytes != release_bytes:
+        raise EvidenceVerificationError(
+            f"Current HEAD redefines registered v1.0.0 evidence: {relative_path}"
+        )
+
+    release_oid = (
+        _git(repository_root, "rev-parse", f"{release_ref}:{relative_path}")
+        .decode()
+        .strip()
+    )
+    working_oid = (
+        _git(
+            repository_root,
+            "hash-object",
+            f"--path={relative_path}",
+            relative_path,
+        )
+        .decode()
+        .strip()
+    )
+    if working_oid != release_oid:
+        raise EvidenceVerificationError(
+            f"Working-tree content differs from released evidence: {relative_path}"
+        )
+    return release_sha256
+
+
 def verify_expected_hashes(
     repository_root: Path, expected_hashes: Mapping[str, str]
 ) -> dict[str, str]:
@@ -114,16 +213,16 @@ def read_evidence_register(register_path: Path) -> list[dict[str, str]]:
     return rows
 
 
-def validate_evidence_register(
-    repository_root: Path, rows: Iterable[Mapping[str, str]]
-) -> dict[str, str]:
-    """Validate register identifiers, paths, statuses, and current byte hashes."""
+def validate_register_structure(
+    rows: Iterable[Mapping[str, str]],
+) -> list[Mapping[str, str]]:
+    """Validate register structure without consulting unrelated live evidence."""
+    materialized = list(rows)
     observed_ids: set[str] = set()
     observed_paths: set[str] = set()
-    calculated: dict[str, str] = {}
     canonical_rows: dict[str, Mapping[str, str]] = {}
 
-    for line_number, row in enumerate(rows, start=2):
+    for line_number, row in enumerate(materialized, start=2):
         if set(row) != set(REGISTER_COLUMNS):
             raise EvidenceVerificationError(
                 f"Malformed register row at CSV line {line_number}"
@@ -158,19 +257,6 @@ def validate_evidence_register(
                 f"Unknown frozen status for {relative_path}: {row['frozen_status']}"
             )
 
-        evidence_path = repository_root / PurePosixPath(relative_path)
-        if not evidence_path.is_file():
-            raise EvidenceVerificationError(
-                f"Registered evidence is missing: {relative_path}"
-            )
-        actual_hash = sha256_file(evidence_path)
-        calculated[relative_path] = actual_hash
-        if actual_hash != registered_hash:
-            raise EvidenceVerificationError(
-                f"Registered SHA-256 mismatch for {relative_path}: "
-                f"expected {registered_hash}, got {actual_hash}"
-            )
-
         if row["frozen_status"] == "CANONICAL_FROZEN":
             canonical_rows[relative_path] = row
 
@@ -186,6 +272,48 @@ def validate_evidence_register(
             raise EvidenceVerificationError(
                 f"Canonical register hash differs for {relative_path}"
             )
+    return materialized
+
+
+def validate_evidence_register(
+    repository_root: Path, rows: Iterable[Mapping[str, str]]
+) -> dict[str, str]:
+    """Verify canonical raw bytes and other evidence against v1.0.0 Git blobs."""
+    structured_rows = validate_register_structure(rows)
+    verify_release_custody(repository_root)
+    calculated: dict[str, str] = {}
+
+    for row in structured_rows:
+        relative_path = row["path"]
+        registered_hash = row["sha256"]
+        if row["frozen_status"] == "CANONICAL_FROZEN":
+            raw_hash = verify_expected_hashes(
+                repository_root, {relative_path: registered_hash}
+            )[relative_path]
+            release_hash = hashlib.sha256(
+                git_blob_bytes(repository_root, RELEASE_TAG, relative_path)
+            ).hexdigest()
+            if release_hash != registered_hash:
+                raise EvidenceVerificationError(
+                    f"Canonical release blob differs for {relative_path}: "
+                    f"expected {registered_hash}, got {release_hash}"
+                )
+            head_hash = hashlib.sha256(
+                git_blob_bytes(repository_root, "HEAD", relative_path)
+            ).hexdigest()
+            if head_hash != registered_hash:
+                raise EvidenceVerificationError(
+                    f"Current HEAD redefines canonical evidence: {relative_path}"
+                )
+            calculated[relative_path] = raw_hash
+        elif row["frozen_status"] in {"SUPPORTING_FROZEN", "SUPPORTING"}:
+            calculated[relative_path] = verify_git_anchored_file(
+                repository_root, relative_path, registered_hash
+            )
+        else:
+            calculated[relative_path] = verify_expected_hashes(
+                repository_root, {relative_path: registered_hash}
+            )[relative_path]
     return calculated
 
 
@@ -220,7 +348,7 @@ def main(argv: list[str] | None = None) -> int:
         registered = validate_evidence_register(root, rows)
         print(
             f"PASS evidence register {register_path.name}: "
-            f"{len(rows)} unique items, {len(registered)} byte hashes verified"
+            f"{len(rows)} unique items, {len(registered)} authoritative hashes verified"
         )
     except (EvidenceVerificationError, OSError, csv.Error) as exc:
         print(f"FAIL assurance evidence verification: {exc}", file=sys.stderr)
