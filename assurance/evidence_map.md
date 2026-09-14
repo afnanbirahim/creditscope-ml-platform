@@ -39,6 +39,13 @@ Git's checkout/clean rules, such as platform line endings. It does not hash
 parsed JSON, apply an assurance-defined normalization, or allow a genuine
 content change to pass.
 
+The CI workflow is explicitly classified as a
+`POST_RELEASE_EVOLVING_CONTROL`. Its registered release hash and existence in
+the tagged tree remain mandatory, but its post-release branch implementation
+may change to keep assurance checks operational. This narrow exception does not
+apply to model, policy, evaluation, or other registered evidence, and it does
+not rewrite the workflow blob preserved by `v1.0.0`.
+
 ## Assurance-question navigation
 
 ### What identifies the released production model and policy?

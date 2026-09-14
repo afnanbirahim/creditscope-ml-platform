@@ -122,6 +122,20 @@ def test_git_anchored_text_rejects_genuine_content_change(tmp_path: Path) -> Non
         verify_git_anchored_file(repository, "evidence.txt", release_hash)
 
 
+def test_explicit_evolving_control_remains_anchored_to_release(tmp_path: Path) -> None:
+    repository, release_hash = _make_text_release_repository(tmp_path)
+    (repository / "evidence.txt").write_bytes(b"post-release control update\n")
+    assert (
+        verify_git_anchored_file(
+            repository,
+            "evidence.txt",
+            release_hash,
+            enforce_current_checkout=False,
+        )
+        == release_hash
+    )
+
+
 def test_git_anchored_text_requires_working_file(tmp_path: Path) -> None:
     repository, release_hash = _make_text_release_repository(tmp_path)
     (repository / "evidence.txt").unlink()
@@ -183,3 +197,14 @@ def test_canonical_register_rows_use_expected_hashes() -> None:
 def test_release_constants_are_frozen() -> None:
     assert RELEASE_TAG == "v1.0.0"
     assert RELEASE_COMMIT == "51db046543c2d95c35058469067ba9f988a6133b"
+
+
+def test_quality_ci_checkout_fetches_release_tag_history() -> None:
+    workflow = (ROOT / ".github" / "workflows" / "ci.yml").read_text(
+        encoding="utf-8"
+    )
+    quality_job, containers_job = workflow.split("\n  containers:", maxsplit=1)
+    assert "uses: actions/checkout@v4" in quality_job
+    assert "fetch-depth: 0" in quality_job
+    assert "fetch-depth: 0" not in containers_job
+    assert "permissions:\n  contents: read" in workflow

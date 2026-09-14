@@ -124,6 +124,7 @@ def verify_git_anchored_file(
     relative_path: str,
     expected_release_sha256: str,
     release_ref: str = RELEASE_TAG,
+    enforce_current_checkout: bool = True,
 ) -> str:
     """Verify release blob, current HEAD, and checked-out Git content identity."""
     _validate_repository_relative_path(relative_path)
@@ -144,12 +145,15 @@ def verify_git_anchored_file(
             f"expected {expected_release_sha256}, got {release_sha256}"
         )
 
+    if not enforce_current_checkout:
+        _git(repository_root, "ls-files", "--error-unmatch", relative_path)
+        return release_sha256
+
     head_bytes = git_blob_bytes(repository_root, "HEAD", relative_path)
     if head_bytes != release_bytes:
         raise EvidenceVerificationError(
             f"Current HEAD redefines registered v1.0.0 evidence: {relative_path}"
         )
-
     release_oid = (
         _git(repository_root, "rev-parse", f"{release_ref}:{relative_path}")
         .decode()
@@ -308,7 +312,12 @@ def validate_evidence_register(
             calculated[relative_path] = raw_hash
         elif row["frozen_status"] in {"SUPPORTING_FROZEN", "SUPPORTING"}:
             calculated[relative_path] = verify_git_anchored_file(
-                repository_root, relative_path, registered_hash
+                repository_root,
+                relative_path,
+                registered_hash,
+                enforce_current_checkout=(
+                    row["release_relationship"] != "POST_RELEASE_EVOLVING_CONTROL"
+                ),
             )
         else:
             calculated[relative_path] = verify_expected_hashes(
